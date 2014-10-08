@@ -12,4 +12,14 @@ object DoneList extends Controller {
   def index = Action {
     Ok(html.donelist());
   }
+  
+  def about = Action {
+    Ok(html.about());
+  }
+
+    
+  def contact = Action {
+    Ok(html.contact());
+  }
+
 }
