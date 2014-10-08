@@ -58,13 +58,11 @@ object Application extends Controller {
    * Handle login form submission.
    */
   def authenticate = Action { implicit request =>
-    Ok(html.index())
-  }/*{ implicit request =>
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.login(formWithErrors)),
-      user => Redirect(routes.Projects.index).withSession("email" -> user._1)
+      user => Redirect(routes.DoneList.index).withSession("email" -> user._1)
     )
-  }*/
+  }
   
 
   /**

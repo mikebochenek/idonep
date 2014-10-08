@@ -8,7 +8,7 @@ GET      /views/*any            controllers.Application.loadPublicHTML(any)
 GET     /login                              controllers.Application.login
 POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout
-                                            
+GET     /donelist                           controllers.DoneList.index
 
 # Play routes serving JSON to AngularJS start with /api
 # GET      /api/celebrities       controllers.Celebrities.index

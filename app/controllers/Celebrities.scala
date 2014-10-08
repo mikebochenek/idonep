@@ -6,9 +6,6 @@ import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.Controller
 
-/*
- * Author: Sari Haj Hussein
- */
 object Celebrities extends Controller {
 
   
