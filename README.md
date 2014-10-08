@@ -1,18 +1,8 @@
-# The Eventual PlayFramework-AngularJS-Bootstrap-MongoDB Seed Project
 
 ## Introduction
 
-The Eventual PlayFramework-AngularJS-Bootstrap-MongoDB Seed Project is a seed project that provides a [CRUD](http://en.wikipedia.org/wiki/Create,_read,_update_and_delete) implementation. It uses the [Play Framework](http://www.playframework.com/) and [MongoDB](http://www.mongodb.org/) on the back-end, and [AngularJS](http://angularjs.org/) and [Bootstrap](http://getbootstrap.com/) on the front-end. It is designed to underpin the development of future applications that adopt the same combination of technologies.
+Based on The Eventual PlayFramework-AngularJS-Bootstrap-MongoDB Seed Project by **[Sari Haj Hussein](http://sarihh.info)**.
 
-## Versioning
-
-The seed uses the versioning <code>p\_pnum\_a\_anum_b\_bnum</code> where:
-
-* <code>pnum</code> is Play Framework version
-
-* <code>anum</code> is AngularJS version
-
-* <code>bnum</code> is Bootstrap version
 
 ## Features
 The seed has the following features (to recall a few):
@@ -67,31 +57,3 @@ Follow these steps in order to deploy the seed on your machine:
 
 ## Screenshots
 
-### Celebrities List
-![Celebrities List](./screenshots/Celebrities%20List.png)
-
-### Adding a Celebrity
-![Adding a Celebrity](./screenshots/Adding%20a%20Celebrity.png)
-
-### Editing/Deleting a Celebrity
-![Editing a Celebrity](./screenshots/Editing-Deleting%20a%20Celebrity.png)
-
-## Licence
-
-Copyright &copy; 2013 **[Sari Haj Hussein](http://sarihh.info)**.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-## Code Disclaimer
-
-The author of this software code has used his best efforts in preparing the code. These efforts include the development, research, testing, and optimization of the theories and programs to determine their effectiveness. This software code is not designed or intended for use in the design, construction, operation or maintenance of any nuclear facility. Author disclaims any express or implied warranty of fitness for such uses. The author makes no warranty of any kind, expressed or implied, with regard to this software code or to the documentation accompanying it. In no event shall the author be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption whatsoever) arising out of, the furnishing, performance, or use of this software code, even if advised of the possibilities of such damages.
