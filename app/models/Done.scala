@@ -9,7 +9,7 @@ import anorm.SqlParser._
 import scala.language.postfixOps
 
 /**
- * mysql> describe item;
+ * mysql> describe done;
  * +------------+------------+------+-----+-------------------+----------------+
  * | Field      | Type       | Null | Key | Default           | Extra          |
  * +------------+------------+------+-----+-------------------+----------------+
@@ -42,6 +42,37 @@ object Done {
         case id ~ owner ~ donetext ~ donedate ~ createdate ~ deleted ~ category ~ doneDay 
           => Done(id, owner, donetext, donedate, createdate, deleted, category, doneDay)
       }
+  }
+
+
+  /** Retrieve all done items for a given ownerID. */
+  def findAll(owner: Long): Seq[Done] = {
+    DB.withConnection { implicit connection =>
+      SQL("select id, owner, donetext, donedate, createdate, deleted, category, doneDay from done where owner = {owner}").on(
+          'owner -> owner).as(Done.simple *)
+    }
+  }
+
+  
+  /** Create a Done item. */
+  def create(done: Done): Done = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          insert into done values (
+            {owner}, {donetext}, {donedate}, {createdate}, {deleted}, {category}, {doneDay}
+          )
+        """).on(
+          'owner -> done.owner,
+          'donetext -> done.donetext,
+          'donetext -> done.donedate,
+          'donetext -> done.createdate,
+          'donetext -> done.deleted,
+          'donetext -> done.category,
+          'password -> done.doneDay).executeUpdate()
+
+      done
+    }
   }
 
 }
