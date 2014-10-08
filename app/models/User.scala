@@ -8,7 +8,7 @@ import anorm.SqlParser._
 
 import scala.language.postfixOps
 
-case class User(id: Int, email: String, username: String, password: String)
+case class User(id: Long, email: String, username: String, password: String)
 /*
 id	bigint(20) PK 
 createdate	datetime 
@@ -30,7 +30,7 @@ object User {
    * Parse a User from a ResultSet
    */
   val simple = {
-    get[Int]("user.id") ~
+    get[Long]("user.id") ~
     get[String]("user.email") ~
     get[String]("user.username") ~
     get[String]("user.password") map {
