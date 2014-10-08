@@ -6,6 +6,8 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 
+import java.util.Date
+
 import scala.language.postfixOps
 
 /**
@@ -24,8 +26,8 @@ import scala.language.postfixOps
  * +------------+------------+------+-----+-------------------+----------------+
  * 8 rows in set (0.00 sec)
  */
-case class Done(id: Long, owner: Long, donetext: String, donedate: Long,
-  createdate: Long, deleted: Boolean, category: Long, doneDay: Long)
+case class Done(id: Long, owner: Long, donetext: String, donedate: Date,
+  createdate: Date, deleted: Boolean, category: Long, doneDay: Long)
 
 object Done {
 
@@ -34,8 +36,8 @@ object Done {
     get[Long]("done.id") ~
       get[Long]("done.owner") ~
       get[String]("done.donetext") ~
-      get[Long]("done.donedate") ~
-      get[Long]("done.createdate") ~
+      get[Date]("done.donedate") ~
+      get[Date]("done.createdate") ~
       get[Boolean]("done.deleted") ~
       get[Long]("done.category") ~
       get[Long]("done.doneDay") map {
