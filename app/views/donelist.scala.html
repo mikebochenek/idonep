@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-ng-app="app" data-ng-controller="ListCtrl" lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,16 +59,9 @@
         
         <div class="row">
          <div class="col-sm-3" ></div>
-         <div class="col-sm-6" >
-          <ul class="list-group" style="text-align: left;">
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />create iDone prototype</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />launched and configured first DigitalOcean droplet</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />spent solid 45 minutes at the gym</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />refactored OpenID servlet example to fit better my needs</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />added xing and linkedIn connections</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />re-start bootstrap project and idea lists</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />daily writing - 600 words</li>
-            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />backup scripts in ~/Dev/learning/linux</li>
+         <div class="col-sm-6" >         
+          <ul ng-repeat="celebrity in celebrities | orderBy:['createdate']" class="list-group" style="text-align: left;">
+            <li class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />{{celebrity.donetext}}</li>
           </ul>
           
           

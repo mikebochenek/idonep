@@ -1,6 +1,4 @@
-/*
- * Author: Sari Haj Hussein
- */
+
 var app = angular.module("app", ["ngResource", "ngRoute"])
 	.constant("apiUrl", "http://localhost:9000/api")
 	.config(["$routeProvider", function($routeProvider) {
@@ -33,7 +31,7 @@ app.controller("AppCtrl", ["$scope", "$location", function($scope, $location) {
 
 // the list controller
 app.controller("ListCtrl", ["$scope", "$resource", "apiUrl", function($scope, $resource, apiUrl) {
-	var Celebrities = $resource(apiUrl + "/celebrities"); // a RESTful-capable resource object
+	var Celebrities = $resource(apiUrl + "/donelist/1"); // a RESTful-capable resource object
 	$scope.celebrities = Celebrities.query(); // for the list of celebrities in public/html/main.html
 }]);
 
