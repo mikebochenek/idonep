@@ -62,16 +62,17 @@ object Done {
       SQL(
         """
           insert into done values (
-            {owner}, {donetext}, {donedate}, {createdate}, {deleted}, {category}, {doneDay}
+          {id}, {owner}, {donetext}, {donedate}, {createdate}, {deleted}, {category}, {doneDay}
           )
         """).on(
+          'id -> done.id,
           'owner -> done.owner,
           'donetext -> done.donetext,
-          'donetext -> done.donedate,
-          'donetext -> done.createdate,
-          'donetext -> done.deleted,
-          'donetext -> done.category,
-          'password -> done.doneDay).executeUpdate()
+          'donedate -> done.donedate,
+          'createdate -> done.createdate,
+          'deleted -> done.deleted,
+          'category -> done.category,
+          'doneDay -> done.doneDay).executeInsert()
 
       done
     }
