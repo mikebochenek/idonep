@@ -14,7 +14,7 @@ CREATE TABLE `done` (
   `category` bigint(20) NOT NULL,
   `doneDay` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1$$
+) ;
 
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL,
@@ -28,8 +28,10 @@ CREATE TABLE `user` (
   `type` varchar(255) DEFAULT NULL,
   `openidtoken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+) ;
 
+INSERT INTO `test`.`user` (`id`, `password`, `username`, `email`) 
+VALUES (1, 'test', 'mike', 'mike@test.com' );
 
 
 create table user (
