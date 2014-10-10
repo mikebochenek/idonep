@@ -61,11 +61,10 @@ object Done {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into done values (
-          {id}, {owner}, {donetext}, {donedate}, {createdate}, {deleted}, {category}, {doneDay}
+          insert into done (owner, donetext, donedate, createdate, deleted, category, doneDay) values (
+          {owner}, {donetext}, {donedate}, {createdate}, {deleted}, {category}, {doneDay}
           )
         """).on(
-          'id -> done.id,
           'owner -> done.owner,
           'donetext -> done.donetext,
           'donedate -> done.donedate,
