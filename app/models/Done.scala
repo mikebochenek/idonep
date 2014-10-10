@@ -2,13 +2,17 @@ package models
 
 import play.api.db._
 import play.api.Play.current
-
 import anorm._
 import anorm.SqlParser._
-
 import java.util.Date
-
 import scala.language.postfixOps
+import play.api.libs.json.Format
+import play.api.libs.json.JsValue
+import play.api.libs.json.Json
+import play.api.libs.json.JsObject
+import play.api.libs.json.JsString
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
 /**
  * mysql> describe done;
@@ -41,21 +45,18 @@ object Done {
       get[Boolean]("done.deleted") ~
       get[Long]("done.category") ~
       get[Long]("done.doneDay") map {
-        case id ~ owner ~ donetext ~ donedate ~ createdate ~ deleted ~ category ~ doneDay 
-          => Done(id, owner, donetext, donedate, createdate, deleted, category, doneDay)
+        case id ~ owner ~ donetext ~ donedate ~ createdate ~ deleted ~ category ~ doneDay => Done(id, owner, donetext, donedate, createdate, deleted, category, doneDay)
       }
   }
-
 
   /** Retrieve all done items for a given ownerID. */
   def findAll(owner: Long): Seq[Done] = {
     DB.withConnection { implicit connection =>
       SQL("select id, owner, donetext, donedate, createdate, deleted, category, doneDay from done where owner = {owner}").on(
-          'owner -> owner).as(Done.simple *)
+        'owner -> owner).as(Done.simple *)
     }
   }
 
-  
   /** Create a Done item. */
   def create(done: Done): Done = {
     DB.withConnection { implicit connection =>
@@ -77,4 +78,8 @@ object Done {
     }
   }
 
+  implicit val doneReads = Json.reads[Done]
+  implicit val doneWrites = Json.writes[Done]
+
 }
+

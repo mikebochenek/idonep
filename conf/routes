@@ -13,6 +13,11 @@ GET     /donelist                           controllers.DoneList.index
 GET     /about                              controllers.DoneList.about
 GET     /contact                            controllers.DoneList.contact
 
+#POST     /api/donelist/new   controllers.DoneList.create
+GET      /api/donelist/:id   controllers.DoneList.getByDay(id: String)
+#POST     /api/donelist/:id   controllers.DoneList.update(id: String)
+#DELETE   /api/donelist/:id   controllers.DoneList.delete(id: String)
+
 
 # Play routes serving JSON to AngularJS start with /api
 # GET      /api/celebrities       controllers.Celebrities.index
