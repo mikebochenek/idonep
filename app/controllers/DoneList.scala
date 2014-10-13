@@ -11,17 +11,20 @@ import play.api.libs.json.Json
 import models.Done
 import scala.concurrent.impl.Future
 import play.api.mvc.SimpleResult
+import play.api.mvc.Request
 
 
-object DoneList extends Controller {
+object DoneList extends Controller with Secured {
 
   def index = Action {
     Ok(html.donelist());
   }
 
-  def getByDay(id: String) = Action { 
-    val all = Done.findByDoneDay("mike@test.com", 2014093) 
-    Ok(Json.toJson(all.map(a => Json.toJson(a))))
+  def getByDay(id: String) = IsAuthenticated { username =>
+    implicit request => {
+      val all = Done.findByDoneDay(username, 2014093)
+      Ok(Json.toJson(all.map(a => Json.toJson(a))))
+    }
   }
 
   /** list all celebrities 
