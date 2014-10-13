@@ -20,10 +20,8 @@ object DoneList extends Controller {
   }
 
   def getByDay(id: String) = Action { 
-    val all = Done.findAll(1) // get all the fields of all the celebrities
-    //Json.toJson(all)
+    val all = Done.findByDoneDay("mike@test.com", 2014093) 
     Ok(Json.toJson(all.map(a => Json.toJson(a))))
-    //cursor.map { dones => Ok(Json.toJson(dones)) } // convert it to a JSON and return it
   }
 
   /** list all celebrities 

@@ -57,6 +57,17 @@ object Done {
     }
   }
 
+  /** Retrieve all done items for a given email (owner) and doneDay */
+  def findByDoneDay(email: String, doneday: Long): Seq[Done] = {
+    DB.withConnection { implicit connection =>
+      SQL("select d.id, d.owner, d.donetext, d.donedate, d.createdate, d.deleted, d.category, d.doneDay " 
+          + " from done d join user u where d.owner = u.id and d.deleted = 0 " 
+          + " and u.email = {email} and d.doneDay = {doneDay}").on(
+        'email -> email,
+        'doneDay -> doneday).as(Done.simple *)
+    }
+  }
+
   /** Create a Done item. */
   def create(done: Done): Done = {
     DB.withConnection { implicit connection =>
