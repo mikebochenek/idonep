@@ -1,4 +1,17 @@
 
+## About
+iDone lets you track and showcase your daily accomplishments
+
+* create an account and start writing in less than a minute
+* built with security and privacy as a primary goals
+* select sharing options from: private, share with manager, or public
+* export your data or integrate to external systems via secure REST API or Webservices
+* enter iDone items online, via email, or on your smart phone
+* available in English, Español, Français, Deutsch, Italiano, Język Polski, Português, русский язык, 日本語, 中文, हिन्दी, العربية, Türkçe
+* completely free for personal use (corporate plans from $10 per month)
+
+Stop making depressing todo lists, instead celebrate your daily accomplishments!
+
 ## Technology stack
 
 1. Play Framework 2.2.3
