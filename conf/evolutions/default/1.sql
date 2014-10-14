@@ -30,23 +30,32 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ;
 
+
 INSERT INTO `test`.`user` (`id`, `password`, `username`, `email`) 
 VALUES (1, 'test', 'mike', 'mike@test.com' );
 
+ALTER TABLE `done` ADD INDEX `done_owner_idx` (`owner`);
+ALTER TABLE `done` ADD INDEX `done_doneday_idx` (`doneday`);
+ALTER TABLE `user` ADD INDEX `user_email_idx` (`email`);
 
-create table user (
-  email                     varchar(255) not null primary key,
-  name                      varchar(255) not null,
-  password                  varchar(255) not null
-);
 
-create table done (
-  id                        bigint not null primary key,
-  name                      varchar(255) not null,
-  folder                    varchar(255) not null
-);
+# http://stackoverflow.com/questions/1071180/is-the-primary-key-automatically-indexed-in-mysql
+# ALTER TABLE `done` ADD INDEX `done_id_idx` (`id`);
+# ALTER TABLE `user` ADD INDEX `user_id_idx` (`id`);
 
-create sequence done_seq start with 1000;
+#create table user (
+#  email                     varchar(255) not null primary key,
+#  name                      varchar(255) not null,
+#  password                  varchar(255) not null
+#);
+
+#create table done (
+#  id                        bigint not null primary key,
+#  name                      varchar(255) not null,
+#  folder                    varchar(255) not null
+# );
+
+# create sequence done_seq start with 1000;
 
 
 # --- !Downs
