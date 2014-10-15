@@ -5,6 +5,7 @@ import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import views.html
+import play.api.libs.functional.syntax._
 
 object DoneList extends Controller with Secured {
 
@@ -29,8 +30,9 @@ object DoneList extends Controller with Secured {
 
   def create() = IsAuthenticated { username =>
     implicit request => {
-      println (request.body.asJson.map(a => Json.fromJson[models.Done](a)))
-      println("yup, we are in the create now ") //+ paramVal)
+      val txt = (request.body.asJson.get \ "donetext")
+      //println (request.body.asJson.map(a => Json.fromJson[models.Done](a)))
+      println("yup, we are in the create now with " + txt)
       Ok
     }
   }
