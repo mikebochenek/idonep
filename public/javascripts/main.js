@@ -39,7 +39,7 @@ app.controller("ListCtrl", ["$scope", "$resource", "apiUrl", function($scope, $r
 app.controller("CreateCtrl", ["$scope", "$resource", "$timeout", "apiUrl", function($scope, $resource, $timeout, apiUrl) {
 	// to save a celebrity
 	$scope.save = function() {
-		var CreateCelebrity = $resource(apiUrl + "/celebrities/new"); // a RESTful-capable resource object
+		var CreateCelebrity = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
 		CreateCelebrity.save($scope.celebrity); // $scope.celebrity comes from the detailForm in public/html/detail.html
 		$timeout(function() { $scope.go('/'); }); // go back to public/html/main.html
 	};
