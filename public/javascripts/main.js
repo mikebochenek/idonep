@@ -37,7 +37,7 @@ app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl", functio
 	// MINE: add()
 	$scope.add = function() {
 		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
-		create.save({'text' : $scope.donetext}); // $scope.celebrity comes from the detailForm in public/html/detail.html
+		create.save({'donetext' : $scope.donetext}); // $scope.celebrity comes from the detailForm in public/html/detail.html
 		$timeout(function() { alert('ooops TODO'); }); // go back to public/html/main.html
 	};
 

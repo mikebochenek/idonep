@@ -29,8 +29,9 @@ object DoneList extends Controller with Secured {
 
   def create() = IsAuthenticated { username =>
     implicit request => {
-      println("yup, we are in the create now")
-      Ok(html.contact()) // return the created celebrity in a JSON
+      println (request.body.asJson.map(a => Json.fromJson[models.Done](a)))
+      println("yup, we are in the create now ") //+ paramVal)
+      Ok
     }
   }
 
