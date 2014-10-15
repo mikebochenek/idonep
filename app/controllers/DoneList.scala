@@ -1,17 +1,10 @@
 package controllers
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import play.Play
+import models.Done
 import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.Controller
-import play.api.data.Forms._
-import views._
-import play.api.libs.json.Json
-import models.Done
-import scala.concurrent.impl.Future
-import play.api.mvc.SimpleResult
-import play.api.mvc.Request
+import views.html
 
 
 object DoneList extends Controller with Secured {
@@ -20,26 +13,16 @@ object DoneList extends Controller with Secured {
     Ok(html.donelist());
   }
 
-  def getByDay(id: String) = IsAuthenticated { username =>
+  def getByDay(id: Long) = IsAuthenticated { username =>
     implicit request => {
-      val all = Done.findByDoneDay(username, 2014093)
+      val all = Done.findByDoneDay(username, id)
       Ok(Json.toJson(all.map(a => Json.toJson(a))))
     }
   }
-
-  /** list all celebrities 
-  def index = Action.async {
-    val cursor = collection.find(
-      BSONDocument(), BSONDocument()).cursor[Celebrity] // get all the fields of all the celebrities
-    val futureList = cursor.collect[List]() // convert it to a list of Celebrity
-    futureList.map { celebrities => Ok(Json.toJson(celebrities)) } // convert it to a JSON and return it
-  }*/
-
   
   def about = Action {
     Ok(html.about());
   }
-
     
   def contact = Action {
     Ok(html.contact());

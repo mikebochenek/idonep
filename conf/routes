@@ -14,7 +14,7 @@ GET     /about                              controllers.DoneList.about
 GET     /contact                            controllers.DoneList.contact
 
 #POST     /api/donelist/new   controllers.DoneList.create
-GET      /api/donelist/:id   controllers.DoneList.getByDay(id: String)
+GET      /api/donelist/:id   controllers.DoneList.getByDay(id: Long)
 #POST     /api/donelist/:id   controllers.DoneList.update(id: String)
 #DELETE   /api/donelist/:id   controllers.DoneList.delete(id: String)
 
