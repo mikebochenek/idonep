@@ -6,6 +6,7 @@ import play.api.mvc.Action
 import play.api.mvc.Controller
 import views.html
 import play.api.libs.functional.syntax._
+import java.util.Date
 
 object DoneList extends Controller with Secured {
 
@@ -32,7 +33,10 @@ object DoneList extends Controller with Secured {
     implicit request => {
       val txt = (request.body.asJson.get \ "donetext")
       //println (request.body.asJson.map(a => Json.fromJson[models.Done](a)))
-      println("yup, we are in the create now with " + txt)
+      println("yup, we are in the create now with " + txt.as[String])
+      
+      //TODO still need to either extract email/owner, and method for donedate
+      Done.create(new Done(1, 1, txt.as[String], new Date(), new Date(), false, 1, 2014093))
       Ok
     }
   }
