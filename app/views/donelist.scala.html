@@ -62,9 +62,19 @@
          <div class="col-sm-6" >         
           <ul class="list-group" style="text-align: left;">
             <li ng-repeat="celebrity in celebrities | orderBy:['createdate']" class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />{{celebrity.donetext}}</li>
+            
+            <li class="list-group-item"><span ng-hide="editing" style="text-align: left;">
+            <form>
+               <img src="@routes.Assets.at("img/check_box.png")" />
+               <input type="text" ng-model="donetext" placeholder="task text" size="50" ng-required/>
+               <button data-ng-click="add()" class="btn btn-primary" type="submit">add</button>
+            </form>
+           </span>
+           </li>
+            
           </ul>
-          
-          
+
+   
            <button type="button" class="btn btn-primary">Add new item</button>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <button type="button" class="btn btn-primary">Save</button>

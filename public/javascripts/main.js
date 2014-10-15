@@ -29,10 +29,18 @@ app.controller("AppCtrl", ["$scope", "$location", function($scope, $location) {
 	};
 }]);
 
-// the list controller
-app.controller("ListCtrl", ["$scope", "$resource", "apiUrl", function($scope, $resource, apiUrl) {
+// MINE:  the list controller
+app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl", function($scope, $resource, $timeout, apiUrl) {
 	var Celebrities = $resource(apiUrl + "/donelist/2014093"); // a RESTful-capable resource object
 	$scope.celebrities = Celebrities.query(); // for the list of celebrities in public/html/main.html
+
+	// MINE: add()
+	$scope.add = function() {
+		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
+		create.save($scope.donetext); // $scope.celebrity comes from the detailForm in public/html/detail.html
+		$timeout(function() { alert('ooops TODO'); }); // go back to public/html/main.html
+	};
+
 }]);
 
 // the create controller
