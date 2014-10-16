@@ -79,7 +79,7 @@ object User {
          email = {email} and password = {password}
         """).on(
           'email -> email,
-          'password -> password).as(User.simple.singleOpt)
+          'password -> hash(password)).as(User.simple.singleOpt)
     }
   }
 
@@ -90,17 +90,23 @@ object User {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into user values (
+          insert into user (email, username, password) values (
             {email}, {username}, {password}
           )
         """).on(
           'email -> user.email,
-          'name -> user.username,
-          'password -> user.password).executeUpdate()
+          'username -> user.username,
+          'password -> hash(user.password)).executeInsert()
 
       user
 
     }
+  }
+  
+  def hash(str: String): String = {
+    val md = java.security.MessageDigest.getInstance("SHA-1")
+    val ha = new sun.misc.BASE64Encoder().encode(md.digest((str + "i2.uZE92").getBytes))
+    ha.toString()
   }
 
 }

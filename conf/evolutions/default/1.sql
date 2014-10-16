@@ -17,7 +17,7 @@ CREATE TABLE `done` (
 ) ;
 
 CREATE TABLE `user` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `createdate` datetime DEFAULT NULL,
   `lastlogindate` datetime DEFAULT NULL,
   `deleted` bit(1) DEFAULT NULL,
