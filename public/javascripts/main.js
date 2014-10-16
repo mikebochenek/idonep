@@ -31,39 +31,42 @@ app.controller("AppCtrl", ["$scope", "$location", function($scope, $location) {
 
 // MINE:  the list controller
 app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl", function($scope, $resource, $timeout, apiUrl) {
-	var Celebrities = $resource(apiUrl + "/donelist/2014093"); // a RESTful-capable resource object
-	$scope.celebrities = Celebrities.query(); // for the list of celebrities in public/html/main.html
 	var date = new Date();
-	
-	// MINE: add()
-	$scope.add = function() {
-		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
-		create.save({'donetext' : $scope.donetext}); // $scope.celebrity comes from the detailForm in public/html/detail.html
-		$timeout(function() { alert('ooops TODO'); }); // go back to public/html/main.html
-	};
 
 	$scope.datestring = function() {
 		var month = date.getMonth() + 1;
 		var day = date.getDate();
 		return date.getFullYear() + (month < 10 ? "0" : "") + month + (day < 10 ? "0" : "") + day;
 	}
-	
+
+	$scope.doneday = $scope.datestring();
+
 	$scope.increasedate = function() {
 		var result = new Date(date);
 	    result.setDate(date.getDate() + 1);
 	    date = result;
-	    //alert($scope.datestring());
+		$scope.doneday = $scope.datestring();
+		var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
+		$scope.celebrities = Celebrities.query(); 
 	}
 
 	$scope.decreasedate = function() {
 		var result = new Date(date);
 	    result.setDate(date.getDate() - 1);
 	    date = result;
-	    //var millisecondOffset = 24 * 60 * 60 * 1000;
-	    //date.setTime(date.getTime() - millisecondOffset);
-	    //alert($scope.datestring());
+		$scope.doneday = $scope.datestring();
+		var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
+		$scope.celebrities = Celebrities.query(); 
 	}
 
+	var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
+	$scope.celebrities = Celebrities.query(); 
+
+	$scope.add = function() {
+		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
+		create.save({'donetext' : $scope.donetext, 'doneday' : $scope.doneday}); // $scope.celebrity comes from the detailForm in public/html/detail.html
+		$timeout(function() { alert('ooops TODO'); }); // go back to public/html/main.html
+	};
 }]);
 
 // the create controller
