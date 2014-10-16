@@ -33,14 +33,13 @@ object DoneList extends Controller with Secured {
   def create() = IsAuthenticated { username =>
     implicit request => {
       val txt = (request.body.asJson.get \ "donetext")
-      //println (request.body.asJson.map(a => Json.fromJson[models.Done](a)))
-      println("yup, we are in the create now with " + txt.as[String])
+      val doneday = (request.body.asJson.get \ "doneday")
+      println("yup, we are in the create now with " + txt.as[String] + " on " + doneday.as[String].toInt)
       
       val id = User.findByEmail(username).id
       
-      //TODO still need to extract donedate
-      Done.create(new Done(1, id, txt.as[String], new Date(), new Date(), false, 1, 2014093))
-      Ok
+      val newDone = Done.create(new Done(1, id, txt.as[String], new Date(), new Date(), false, 1, doneday.as[String].toInt))
+      Ok(Json.toJson(newDone))
     }
   }
 
