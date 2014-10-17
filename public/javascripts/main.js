@@ -70,7 +70,7 @@ app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl",
 	$scope.add = function() {
 		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
 		create.save({'donetext' : $scope.donetext, 'doneday' : $scope.doneday}); // $scope.celebrity comes from the detailForm in public/html/detail.html
-		$timeout(function() { $scope.init(); }); // go back to public/html/main.html
+		$timeout(function() { $scope.init(); $scope.donetext=''; $scope.show=false; }); // go back to public/html/main.html
 	};
 }]);
 
