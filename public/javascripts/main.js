@@ -30,7 +30,8 @@ app.controller("AppCtrl", ["$scope", "$location", function($scope, $location) {
 }]);
 
 // MINE:  the list controller
-app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl", function($scope, $resource, $timeout, apiUrl) {
+app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl", 
+                            function($scope, $resource, $timeout, apiUrl) {
 	var date = new Date();
 
 	$scope.datestring = function() {
@@ -48,24 +49,28 @@ app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl", functio
 		$scope.doneday = $scope.datestring();
 		var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
 		$scope.celebrities = Celebrities.query(); 
-	}
+	};
 
 	$scope.decreasedate = function() {
 		var result = new Date(date);
-	    result.setDate(date.getDate() - 1);
+	    result.setDate(date.getDate() - 1); // increase and decrease are almost identical, except this line
 	    date = result;
 		$scope.doneday = $scope.datestring();
 		var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
 		$scope.celebrities = Celebrities.query(); 
-	}
+	};
 
-	var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
-	$scope.celebrities = Celebrities.query(); 
-
+	$scope.init = function() {
+	    var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
+	    $scope.celebrities = Celebrities.query(); 
+	};
+	
+	$scope.init();
+	
 	$scope.add = function() {
 		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
 		create.save({'donetext' : $scope.donetext, 'doneday' : $scope.doneday}); // $scope.celebrity comes from the detailForm in public/html/detail.html
-		$timeout(function() { alert('ooops TODO'); }); // go back to public/html/main.html
+		$timeout(function() { $scope.init(); }); // go back to public/html/main.html
 	};
 }]);
 
