@@ -71,6 +71,7 @@ app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl",
 		var create = $resource(apiUrl + "/donelist/new"); // a RESTful-capable resource object
 		create.save({'donetext' : $scope.donetext, 'doneday' : $scope.doneday}); // $scope.celebrity comes from the detailForm in public/html/detail.html
 		$timeout(function() { $scope.init(); $scope.donetext=''; $scope.show=false; }); // go back to public/html/main.html
+		//TODO should I implement a success() or simply sleep for 500ms?
 	};
 }]);
 
