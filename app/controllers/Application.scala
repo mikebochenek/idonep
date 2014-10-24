@@ -37,8 +37,6 @@ object Application extends Controller {
       NotFound
   }
   
-  //TODO obviously this will have to include 2nd password and a call to create
-  // and error handling (email already in use...)
   val loginForm = Form(
     tuple(
       "email" -> text,
@@ -48,8 +46,8 @@ object Application extends Controller {
     })
   )
 
-  // -- Authentication
-
+  //TODO obviously this will have to include 2nd password and a call to create
+  // and error handling (email already in use...)
   val createUserForm = Form(
     tuple(
       "email" -> text,
@@ -60,16 +58,10 @@ object Application extends Controller {
     })
   )
 
-  /**
-   * Login page.
-   */
   def login = Action { implicit request =>
     Ok(html.login(loginForm))
   }
 
-  /**
-   * Handle login form submission.
-   */
   def authenticate = Action { implicit request =>
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.login(formWithErrors)),
@@ -89,9 +81,6 @@ object Application extends Controller {
   }
 
 
-  /**
-   * Logout and clean the session.
-   */
   def logout = Action {
     Redirect(routes.Application.login).withNewSession.flashing(
       "success" -> "You've been logged out"
