@@ -26,7 +26,8 @@ DELETE   /api/donelist/:id   controllers.DoneList.delete(id: Long)
 # POST     /api/celebrities/:id   controllers.Celebrities.update(id: String)
 # DELETE   /api/celebrities/:id   controllers.Celebrities.delete(id: String)
 
-# Map static resources from the /public folder to the /assets URL path
+# Map static resources from the /public folder to the / URL path
+# this breaks the last "redirect all unknown routes..." but I need this for the language selection dropdown
 GET      /*file          controllers.Assets.at(path="/public", file)
 
 # Redirect all unknown routes to the index page
