@@ -6,6 +6,7 @@ GET      /views/*any            controllers.Application.loadPublicHTML(any)
 
 # Authentication
 GET     /login                              controllers.Application.login
+GET     /createuser                              controllers.Application.createuser
 POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout
 

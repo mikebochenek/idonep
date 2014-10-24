@@ -36,6 +36,18 @@ object Application extends Controller {
     else
       NotFound
   }
+  
+  //TODO obviously this will have to include 2nd password and a call to create
+  // and error handling (email already in use...)
+  val createUserForm = Form(
+    tuple(
+      "email" -> text,
+      "password" -> text
+    ) verifying ("Invalid email or password", result => result match {
+      case (email, password) => User.authenticate(email, password).isDefined
+    })
+  )
+
   // -- Authentication
 
   val loginForm = Form(
@@ -63,7 +75,11 @@ object Application extends Controller {
       user => Redirect(routes.DoneList.index).withSession("email" -> user._1)
     )
   }
-  
+
+  def createuser = Action { implicit request =>
+    Ok(html.createuser(createUserForm))
+  }
+
 
   /**
    * Logout and clean the session.
