@@ -1,4 +1,4 @@
-@(form: Form[(String,String)])(implicit flash: Flash)
+@(form: Form[(String,String,String)])(implicit flash: Flash)
 
 @main(title = "contact") {
 
@@ -6,7 +6,7 @@
 
       <div class="starter-template">
       
-        @helper.form(routes.Application.createuser) {
+        @helper.form(routes.Application.submitcreateuser) {
             
             <h1>Create new account</h1>
             
@@ -28,8 +28,8 @@
               <div class="col-sm-4">
                 <input class="form-control span4" type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
                 <input class="form-control span4" type="password" name="password" id="password" placeholder="Password">
-                <input class="form-control span4" type="password" name="password" id="password" placeholder="re-enter Password">
-                <button class="btn btn-primary" type="submit" id="loginbutton">Create</button>
+                <input class="form-control span4" type="password2" name="password2" id="password2" placeholder="re-enter Password">
+                <button class="btn btn-primary" type="submit" id="createbutton">Create</button>
               </div>
             
               <div class="col-sm-4" ></div>
@@ -38,7 +38,7 @@
         }
         
         <p class="note">
-            don't have an account yet?  click here to <a href="createuser">create a free account</a>.
+            note that passwords are stored in a secure hash, and you we cannot send you a forgotten password.
         </p>
 
         

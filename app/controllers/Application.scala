@@ -39,7 +39,7 @@ object Application extends Controller {
   
   //TODO obviously this will have to include 2nd password and a call to create
   // and error handling (email already in use...)
-  val createUserForm = Form(
+  val loginForm = Form(
     tuple(
       "email" -> text,
       "password" -> text
@@ -50,12 +50,13 @@ object Application extends Controller {
 
   // -- Authentication
 
-  val loginForm = Form(
+  val createUserForm = Form(
     tuple(
       "email" -> text,
-      "password" -> text
-    ) verifying ("Invalid email or password", result => result match {
-      case (email, password) => User.authenticate(email, password).isDefined
+      "password" -> text,
+      "password2" -> text
+    ) verifying ("email already in use or passwords not matching", result => result match {
+      case (email, password, password2) => User.create(email, password, password2).isDefined
     })
   )
 
@@ -78,6 +79,13 @@ object Application extends Controller {
 
   def createuser = Action { implicit request =>
     Ok(html.createuser(createUserForm))
+  }
+
+  def submitcreateuser = Action { implicit request =>
+    createUserForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.createuser(formWithErrors)),
+      user => Redirect(routes.DoneList.index).withSession("email" -> user._1)
+    )
   }
 
 

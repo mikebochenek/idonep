@@ -102,6 +102,24 @@ object User {
 
     }
   }
+
+  def create(email: String, password: String, password2: String) = {
+    println("creating user " + email)
+    
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          insert into user (email, username, password) values (
+            {email}, {username}, {password}
+          )
+        """).on(
+          'email -> email,
+          'username -> email,
+          'password -> hash(password)).executeInsert()
+
+    }
+  }
+
   
   def hash(str: String): String = {
     val md = java.security.MessageDigest.getInstance("SHA-1")
