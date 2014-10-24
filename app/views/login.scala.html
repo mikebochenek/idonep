@@ -22,20 +22,22 @@
                 </p>
             }
             
-            <p>
-                <input type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
-            </p>
-            <p>
-                <input type="password" name="password" id="password" placeholder="Password">
-            </p>
-            <p>
-                <button type="submit" id="loginbutton">Login</button>
-            </p>
+            <div class="row">
+              <div class="col-sm-4" ></div>
             
+              <div class="col-sm-4">
+                <input class="form-control span4" type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
+                <input class="form-control span4" type="password" name="password" id="password" placeholder="Password">
+                <button class="btn btn-primary" type="submit" id="loginbutton">Login</button>
+              </div>
+            
+              <div class="col-sm-4" ></div>
+            
+            </div>
         }
         
         <p class="note">
-            Try <em>mike@@test.com</em> with <em>test</em> as password.
+            don't have an account yet?  click here to <a href="createuser">create a free account</a>.
         </p>
 
         
