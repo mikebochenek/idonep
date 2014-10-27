@@ -2,11 +2,10 @@ package models
 
 import play.api.db._
 import play.api.Play.current
-
 import anorm._
 import anorm.SqlParser._
-
 import scala.language.postfixOps
+import java.util.Date
 
 /**
  * mysql> describe user
@@ -109,13 +108,14 @@ object User {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into user (email, username, password) values (
-            {email}, {username}, {password}
+          insert into user (email, username, password, createdate) values (
+            {email}, {username}, {password}, {createdate}
           )
         """).on(
           'email -> email,
           'username -> email,
-          'password -> hash(password)).executeInsert()
+          'password -> hash(password),
+          'createdate -> new Date()).executeInsert()
 
     }
   }
