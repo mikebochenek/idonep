@@ -46,11 +46,6 @@ object User {
       }
   }
 
-  // -- Queries
-
-  /**
-   * Retrieve a User from email.
-   */
   def findByEmail(email: String): User = {
     DB.withConnection { implicit connection =>
       SQL("select id, email, username, password from user where email = {email}").on(
@@ -58,18 +53,12 @@ object User {
     }
   }
 
-  /**
-   * Retrieve all users.
-   */
   def findAll: Seq[User] = {
     DB.withConnection { implicit connection =>
       SQL("select id, email, username, password from user").as(User.simple *)
     }
   }
 
-  /**
-   * Authenticate a User.
-   */
   def authenticate(email: String, password: String): Option[User] = {
     DB.withConnection { implicit connection =>
       SQL(
@@ -82,9 +71,6 @@ object User {
     }
   }
 
-  /**
-   * Create a User.
-   */
   def create(user: User): User = {
     DB.withConnection { implicit connection =>
       SQL(
