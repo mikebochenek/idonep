@@ -32,8 +32,6 @@ case class User(id: Long, email: String, username: String, password: String)
 
 object User {
 
-  // -- Parsers
-
   /**
    * Parse a User from a ResultSet
    */
@@ -56,6 +54,18 @@ object User {
   def findAll: Seq[User] = {
     DB.withConnection { implicit connection =>
       SQL("select id, email, username, password from user").as(User.simple *)
+    }
+  }
+  
+  def updatelastlogindate(email: String) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+         update user set lastlogindate = {lastlogindate} user where 
+         email = {email} 
+        """).on(
+          'email -> email,
+          'lastlogindate -> new Date()).executeUpdate
     }
   }
 
