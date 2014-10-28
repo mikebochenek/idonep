@@ -47,10 +47,10 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
           
-@session.get("user").map { user =>
-            <li><a href="login">login</a></li>
-}.getOrElse{
+@session.get("email").map { user =>
             <li><a href="logout">logout</a></li>
+}.getOrElse{
+            <li><a href="login">login</a></li>
 }          
             <li>
             	<div class="span2 bfh-selectbox bfh-languages" data-language="en_US" 
