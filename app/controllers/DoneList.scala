@@ -4,6 +4,7 @@ import models.Done
 import play.api.libs.json.Json
 import play.api.mvc.Action
 import play.api.mvc.Controller
+import play.api.mvc.Session
 import views.html
 import play.api.libs.functional.syntax._
 import java.util.Date
@@ -11,7 +12,7 @@ import models.User
 
 object DoneList extends Controller with Secured {
 
-  def index = Action {
+  def index = Action { implicit request =>
     Ok(html.donelist());
   }
 
@@ -22,11 +23,11 @@ object DoneList extends Controller with Secured {
     }
   }
 
-  def about = Action {
+  def about = Action { implicit request =>
     Ok(html.about());
   }
 
-  def contact = Action {
+  def contact = Action { implicit request =>
     Ok(html.contact());
   }
 
