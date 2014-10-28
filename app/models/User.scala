@@ -85,13 +85,14 @@ object User {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into user (email, username, password) values (
-            {email}, {username}, {password}
+          insert into user (email, username, password, createdate) values (
+            {email}, {username}, {password}, {createdate}
           )
         """).on(
           'email -> user.email,
           'username -> user.username,
-          'password -> hash(user.password)).executeInsert()
+          'password -> hash(user.password),
+          'createdate -> new Date()).executeInsert()
 
       user
 
