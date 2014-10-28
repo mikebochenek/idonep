@@ -48,6 +48,7 @@
           <ul class="nav navbar-nav navbar-right">
           
 @session.get("email").map { user =>
+            <li><a href="settings">settings</a></li>
             <li><a href="logout">logout</a></li>
 }.getOrElse{
             <li><a href="login">login</a></li>
