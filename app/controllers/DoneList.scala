@@ -41,13 +41,27 @@ object DoneList extends Controller with Secured {
       val id = User.findByEmail(username).id
       val tags = Tag.findAll(id)
 
-      // strip out #
-      // compare to existing tags, create if needed
-      // if existing, than assign
-      
+      val newtags = extractHashes(txt.as[String])
+
+      //TODO we should probably replace all newtags within txt...  
       val newDone = Done.create(new Done(1, id, txt.as[String], new Date(), new Date(), false, 1, doneday.as[String].toInt))
+      
+      for (tag <- newtags) {
+        if (tags.contains(tag)) {
+          // if existing, than assign
+        } else {
+          // compare to existing tags, create if needed
+          val newlycreatetag = Tag.create(new Tag(0, id, tag.substring(1), null, false))
+          println (newlycreatetag.id + " " + newlycreatetag) //TODO this doesn't return the new ID.. wtf!
+        }
+      }
+
       Ok(Json.toJson(newDone))
     }
+  }
+  
+  def extractHashes(s: String): Array[String] = {
+    s.split("\\ ").filter(a => a.startsWith("#"))
   }
 
   def update(id: Long) = IsAuthenticated { username =>

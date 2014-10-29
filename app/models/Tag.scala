@@ -48,38 +48,21 @@ object Tag {
     }
   }
 
-  /** Retrieve all done items for a given email (owner) and doneDay 
-  def findByDoneDay(email: String, doneday: Long): Seq[Done] = {
-    println (email + " " + doneday + " .... ")
-    DB.withConnection { implicit connection =>
-      SQL("select d.id, d.owner, d.donetext, d.donedate, d.createdate, d.deleted, d.category, d.doneDay " 
-          + " from done d join user u where d.owner = u.id and d.deleted = 0 " 
-          + " and u.email = {email} and d.doneDay = {doneDay}").on(
-        'email -> email,
-        'doneDay -> doneday).as(Done.simple *)
-    }
-  }*/
-
-  /** Create a Done item.
-  def create(done: Done): Done = {
+  def create(tag: Tag): Tag = {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into done (owner, donetext, donedate, createdate, deleted, category, doneDay) values (
-          {owner}, {donetext}, {donedate}, {createdate}, {deleted}, {category}, {doneDay}
+          insert into tag (owner, tag, deleted) values (
+          {owner}, {tag}, {deleted}
           )
         """).on(
-          'owner -> done.owner,
-          'donetext -> done.donetext,
-          'donedate -> done.donedate,
-          'createdate -> done.createdate,
-          'deleted -> done.deleted,
-          'category -> done.category,
-          'doneDay -> done.doneDay).executeInsert()
+          'owner -> tag.owner,
+          'tag -> tag.tag,
+          'deleted -> 0).executeInsert()
 
-      done
+      tag
     }
-  } */
+  }
 
   implicit val tagReads = Json.reads[Tag]
   implicit val tagWrites = Json.writes[Tag]
