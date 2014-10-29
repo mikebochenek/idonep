@@ -4,6 +4,7 @@
     <div class="container">
 
       <div class="starter-template">
+@session.get("email").map { user =>
         <h1><button data-ng-click="decreasedate()" class="glyphicon glyphicon-step-backward"></button><span data-ng-model="doneday">{{doneday}}</span><button data-ng-click="increasedate()" class="glyphicon glyphicon-step-forward"></button></h1>
         <p class="lead">I've completed the following tasks</p>
         
@@ -32,6 +33,10 @@
          </div><!-- /.col-sm-6 -->
          <div class="col-sm-3" ></div>
         </div>
+}.getOrElse{
+            <div>you should probably <a href="login">login</a></div>
+}          
+
         
       </div>
 
