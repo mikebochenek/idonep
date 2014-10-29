@@ -15,6 +15,9 @@ GET     /donelist                           controllers.DoneList.index
 GET     /about                              controllers.DoneList.about
 GET     /contact                            controllers.DoneList.contact
 
+GET     /reports                              controllers.Reports.load
+GET     /settings                            controllers.Settings.load
+
 GET      /api/donelist/:id   controllers.DoneList.getByDay(id: Long)
 POST     /api/donelist/new   controllers.DoneList.create
 POST     /api/donelist/:id   controllers.DoneList.update(id: Long)
