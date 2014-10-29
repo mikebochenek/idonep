@@ -18,7 +18,7 @@ CREATE TABLE `done` (
 
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `createdate` datetime DEFAULT NULL,
+  `createdate` datetime DEFAULT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastlogindate` datetime DEFAULT NULL,
   `deleted` bit(1) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
