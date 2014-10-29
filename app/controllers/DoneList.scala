@@ -9,6 +9,7 @@ import views.html
 import play.api.libs.functional.syntax._
 import java.util.Date
 import models.User
+import models.Tag
 
 object DoneList extends Controller with Secured {
 
@@ -38,6 +39,11 @@ object DoneList extends Controller with Secured {
       println("yup, we are in the create now with " + txt.as[String] + " on " + doneday.as[String].toInt)
       
       val id = User.findByEmail(username).id
+      val tags = Tag.findAll(id)
+
+      // strip out #
+      // compare to existing tags, create if needed
+      // if existing, than assign
       
       val newDone = Done.create(new Done(1, id, txt.as[String], new Date(), new Date(), false, 1, doneday.as[String].toInt))
       Ok(Json.toJson(newDone))

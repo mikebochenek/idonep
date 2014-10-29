@@ -41,13 +41,12 @@ object Tag {
       }
   }
 
-  /** Retrieve all done items for a given ownerID. 
-  def findAll(owner: Long): Seq[Done] = {
+  def findAll(owner: Long): Seq[Tag] = {
     DB.withConnection { implicit connection =>
-      SQL("select id, owner, donetext, donedate, createdate, deleted, category, doneDay from done where owner = {owner}").on(
-        'owner -> owner).as(Done.simple *)
+      SQL("select id, owner, tag, createdate, deleted from tag where owner = {owner}").on(
+        'owner -> owner).as(Tag.simple *)
     }
-  }*/
+  }
 
   /** Retrieve all done items for a given email (owner) and doneDay 
   def findByDoneDay(email: String, doneday: Long): Seq[Done] = {
