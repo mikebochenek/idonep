@@ -48,7 +48,7 @@ object Tag {
     }
   }
 
-  def create(tag: Tag): Tag = {
+  def create(tag: Tag): Option[Long] = {
     DB.withConnection { implicit connection =>
       SQL(
         """
@@ -59,8 +59,6 @@ object Tag {
           'owner -> tag.owner,
           'tag -> tag.tag,
           'deleted -> 0).executeInsert()
-
-      tag
     }
   }
 

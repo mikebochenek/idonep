@@ -10,6 +10,7 @@ import play.api.libs.functional.syntax._
 import java.util.Date
 import models.User
 import models.Tag
+import models.DoneTag
 
 object DoneList extends Controller with Secured {
 
@@ -49,14 +50,16 @@ object DoneList extends Controller with Secured {
       for (tag <- newtags) {
         if (tags.contains(tag)) {
           // if existing, than assign
+          println ("// if existing, than assign")
         } else {
           // compare to existing tags, create if needed
           val newlycreatetag = Tag.create(new Tag(0, id, tag.substring(1), null, false))
-          println (newlycreatetag.id + " " + newlycreatetag) //TODO this doesn't return the new ID.. wtf!
+          println ("// compare to existing tags, create if needed  " + newlycreatetag)
+          DoneTag.create(new DoneTag(0, newlycreatetag.get, newDone.get, null, false))
         }
       }
 
-      Ok(Json.toJson(newDone))
+      Ok("ok"/*Json.toJson(newDone)*/)
     }
   }
   

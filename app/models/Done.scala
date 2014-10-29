@@ -71,7 +71,7 @@ object Done {
   }
 
   /** Create a Done item. */
-  def create(done: Done): Done = {
+  def create(done: Done): Option[Long] = {
     DB.withConnection { implicit connection =>
       SQL(
         """
@@ -86,8 +86,6 @@ object Done {
           'deleted -> done.deleted,
           'category -> done.category,
           'doneDay -> done.doneDay).executeInsert()
-
-      done
     }
   }
 
