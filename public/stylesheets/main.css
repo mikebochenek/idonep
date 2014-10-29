@@ -1,6 +1,15 @@
-/*
- * Author: Sari Haj Hussein
- */
+.starter-template {
+  padding: 40px 15px;
+}
+
 td.pad {
 	padding-right: 20px;
+}
+
+h1 {
+	  text-align: center;
+}
+
+.mycenter {
+	  text-align: center;
 }

@@ -6,9 +6,9 @@
       <div class="starter-template">
 @session.get("email").map { user =>
         <h1><button data-ng-click="decreasedate()" class="glyphicon glyphicon-step-backward"></button><span data-ng-model="doneday">{{doneday}}</span><button data-ng-click="increasedate()" class="glyphicon glyphicon-step-forward"></button></h1>
-        <p class="lead">I've completed the following tasks</p>
+        <p class="lead mycenter">I've completed the following tasks</p>
         
-        <div class="row">
+        <div class="row mycenter" >
          <div class="col-sm-3" ></div>
          <div class="col-sm-6" >         
           <ul class="list-group" style="text-align: left;">
@@ -34,7 +34,7 @@
          <div class="col-sm-3" ></div>
         </div>
 }.getOrElse{
-            <div>you should probably <a href="login">login</a></div>
+            <h1>you should probably <a href="login">login</a></h1>
 }          
 
         

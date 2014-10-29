@@ -21,7 +21,7 @@ object DoneList extends Controller with Secured {
       val all = Done.findByDoneDay(username, id)
       Ok(Json.toJson(all.map(a => Json.toJson(a))))
     }
-  }
+  } 
 
   def about = Action { implicit request =>
     Ok(html.about());
