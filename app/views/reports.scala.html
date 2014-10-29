@@ -1,9 +1,18 @@
-@()(implicit session: Session)
+@(deeds: Seq[Done])(implicit session: Session)
 @main(title = "reports") {
     <div class="container">
 
       <div class="starter-template">
       	<h1>reports</h1>
+      	<table class="table table-striped">
+		@for((deed, index) <- deeds.zipWithIndex)  {	
+		  <tr>
+		  <td>@index</td>
+		  <td>@deed.donedate.format("dd MMM YYYY")</td>
+		  <td>@deed.donetext</td>
+		  </tr>
+		}
+		</table>
       </div>
 
     </div><!-- /.container -->

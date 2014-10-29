@@ -52,7 +52,8 @@ object Done {
   /** Retrieve all done items for a given ownerID. */
   def findAll(owner: Long): Seq[Done] = {
     DB.withConnection { implicit connection =>
-      SQL("select id, owner, donetext, donedate, createdate, deleted, category, doneDay from done where owner = {owner}").on(
+      SQL("select id, owner, donetext, donedate, createdate, deleted, category, doneDay "
+    		  + " from done where owner = {owner} order by createdate desc").on(
         'owner -> owner).as(Done.simple *)
     }
   }

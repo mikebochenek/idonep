@@ -14,11 +14,11 @@ import play.api.data.Forms._
 import models._
 import views._
 
-
 object Reports extends Controller with Secured {
   def load() = IsAuthenticated { username =>
     implicit request => {
-    	Ok(views.html.reports())
+      val id = User.findByEmail(username).id
+      Ok(views.html.reports(Done.findAll(id)))
     }
   }
 }
