@@ -24,13 +24,6 @@ POST     /api/donelist/:id   controllers.DoneList.update(id: Long)
 DELETE   /api/donelist/:id   controllers.DoneList.delete(id: Long)
 
 
-# Play routes serving JSON to AngularJS start with /api
-# GET      /api/celebrities       controllers.Celebrities.index
-# POST     /api/celebrities/new   controllers.Celebrities.create
-# GET      /api/celebrities/:id   controllers.Celebrities.show(id: String)
-# POST     /api/celebrities/:id   controllers.Celebrities.update(id: String)
-# DELETE   /api/celebrities/:id   controllers.Celebrities.delete(id: String)
-
 # Map static resources from the /public folder to the / URL path
 # this breaks the last "redirect all unknown routes..." but I need this for the language selection dropdown
 GET      /*file          controllers.Assets.at(path="/public", file)
