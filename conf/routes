@@ -6,8 +6,8 @@ GET      /views/*any            controllers.Application.loadPublicHTML(any)
 
 # Authentication
 GET     /login                              controllers.Application.login
-GET     /createuser                              controllers.Application.createuser
-GET     /submitcreateuser                              controllers.Application.submitcreateuser
+GET     /createuser                         controllers.Application.createuser
+GET     /submitcreateuser                   controllers.Application.submitcreateuser
 POST    /login                              controllers.Application.authenticate
 GET     /logout                             controllers.Application.logout
 
@@ -15,8 +15,10 @@ GET     /donelist                           controllers.DoneList.index
 GET     /about                              controllers.DoneList.about
 GET     /contact                            controllers.DoneList.contact
 
-GET     /reports                              controllers.Reports.load
-GET     /settings                            controllers.Settings.load
+GET     /reports                            controllers.Reports.load
+GET     /settings                           controllers.Settings.load
+POST    /settings                           controllers.Settings.save
+
 
 GET      /api/donelist/:id   controllers.DoneList.getByDay(id: Long)
 POST     /api/donelist/new   controllers.DoneList.create

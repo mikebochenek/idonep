@@ -18,7 +18,24 @@ import views._
 object Settings extends Controller with Secured {
   def load() = IsAuthenticated { username =>
     implicit request => {
-    	Ok(views.html.settings())
+    	Ok(views.html.settings(settingsForm))
     }
   }
+  
+  val settingsForm = Form(
+    tuple(
+      "email" -> text,
+      "password" -> text
+    ) verifying ("Invalid email or password", result => result match {
+      case (email, password) => User.authenticate(email, password).isDefined
+    })
+  )
+  
+  def save = Action { implicit request =>
+    settingsForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.login(formWithErrors)),
+      user => Redirect(routes.DoneList.index).withSession("email" -> user._1)
+    )
+  }
+
 }
