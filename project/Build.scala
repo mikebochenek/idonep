@@ -8,7 +8,8 @@ object ApplicationBuild extends Build {
   val appVersion = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    "mysql" % "mysql-connector-java" % "5.1.21")
+    "mysql" % "mysql-connector-java" % "5.1.21",
+    "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.1")
 
   val main = play.Project(appName, appVersion, appDependencies).settings()
 }
