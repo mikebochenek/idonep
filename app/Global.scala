@@ -23,8 +23,8 @@ object Global extends GlobalSettings {
     val actor = Akka.system.actorOf(
       Props(new EmailJobActor()))
 
-    Akka.system.scheduler.schedule(
-      calculateDelayForSchedule.seconds, 1.days, actor, "send")
+    //Akka.system.scheduler.schedule(calculateDelayForSchedule.seconds, 1.days, actor, "send")
+    Akka.system.scheduler.schedule(0.seconds, 1.minutes, actor, "send")
   }
 
   /**
