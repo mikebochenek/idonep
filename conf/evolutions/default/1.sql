@@ -18,7 +18,7 @@ CREATE TABLE `done` (
 
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `createdate` datetime DEFAULT NULL DEFAULT CURRENT_TIMESTAMP,
+  `createdate` datetime DEFAULT NULL,
   `lastlogindate` datetime DEFAULT NULL,
   `deleted` bit(1) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -31,12 +31,13 @@ CREATE TABLE `user` (
 ) ;
 
 
-INSERT INTO `test`.`user` (`id`, `password`, `username`, `email`) 
-VALUES (1, 'test', 'mike', 'mike@test.com' );
-
 ALTER TABLE `done` ADD INDEX `done_owner_idx` (`owner`);
 ALTER TABLE `done` ADD INDEX `done_doneday_idx` (`doneday`);
 ALTER TABLE `user` ADD INDEX `user_email_idx` (`email`);
+
+
+INSERT INTO `test`.`user` (`id`, `password`, `username`, `email`) 
+VALUES (1, 'test', 'mike', 'mike@test.com' );
 
 
 # http://stackoverflow.com/questions/1071180/is-the-primary-key-automatically-indexed-in-mysql
