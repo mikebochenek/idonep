@@ -2,6 +2,11 @@ package actors
 
 import akka.actor.Actor
 import models.User
+import models.Done
+import java.text.SimpleDateFormat
+import java.util.Date
+import com.typesafe.plugin._
+import play.api.Play.current
 
 class EmailJobActor() extends Actor {
   def receive = {
@@ -15,8 +20,32 @@ class EmailJobActor() extends Actor {
     play.api.Logger.info("executing send() in EmailJobActor..")
     User.findAll.foreach(sendemail)
   }
-  
+
+  val sdf = new SimpleDateFormat("yyyyMMdd")
+  val prettySdf = new SimpleDateFormat("EEE, dd MMM yyyy")
+
   def sendemail(user: User) {
-    println ("processing " + user.email)
+    println("processing " + user.email)
+
+    val dateStr = prettySdf.format(new Date())
+    val doneseq = Done.findByDoneDay(user.email, sdf.format(new Date()).toLong)
+
+    var html = "<html><body><h1>Done " + dateStr + "</h1>" + "<ul>"
+    
+    for (done <- doneseq) {
+      html += "<li>" + done.donetext + "</li>" //TODO probably need escaping for html...
+    }
+    	
+    html += "</ul></body></html>"
+
+    val subject = "Done today: " + dateStr
+      
+    val mail = use[MailerPlugin].email
+    mail.setSubject(subject)
+    mail.setRecipient(user.email)
+    mail.setFrom("donetoday@idone.ch")
+    mail.sendHtml(html)
+
+    //println ("sent mail: " + html)
   }
 }

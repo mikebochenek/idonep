@@ -23,8 +23,8 @@ object Global extends GlobalSettings {
     val actor = Akka.system.actorOf(
       Props(new EmailJobActor()))
 
-    //Akka.system.scheduler.schedule(calculateDelayForSchedule.seconds, 1.days, actor, "send")
-    Akka.system.scheduler.schedule(0.seconds, 1.minutes, actor, "send")
+    Akka.system.scheduler.schedule(calculateDelayForSchedule.seconds, 1.days, actor, "send")
+    //Akka.system.scheduler.schedule(0.seconds, 1.minutes, actor, "send")
   }
 
   /**
@@ -35,7 +35,7 @@ object Global extends GlobalSettings {
   private def calculateDelayForSchedule: Long = {
     var c = Calendar.getInstance();
     c.set(Calendar.HOUR_OF_DAY, 23);
-    c.set(Calendar.MINUTE, 25);
+    c.set(Calendar.MINUTE, 45);
     c.set(Calendar.SECOND, 0);
     var plannedStart = c.getTime();
     val now = new Date();
