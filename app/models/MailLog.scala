@@ -20,23 +20,25 @@ import play.api.libs.functional.syntax._
  * | Field      | Type       | Null | Key | Default           | Extra          |
  * +------------+------------+------+-----+-------------------+----------------+
  * | id         | int(11)    | NO   | PRI | NULL              | auto_increment |
- * | recipient  | int(11)    | YES  | MUL | NULL              |                |
- * | donetext   | text       | YES  |     | NULL              |                |
+ * | recipient  | int(11)    | YES  |     | NULL              |                |
+ * | subject    | text       | YES  |     | NULL              |                |
+ * | content    | text       | YES  |     | NULL              |                |
  * | createdate | timestamp  | NO   |     | CURRENT_TIMESTAMP |                |
- * | status     | tinyint(1) | YES  | MUL | NULL              |                |
+ * | status     | tinyint(1) | YES  |     | NULL              |                |
  * +------------+------------+------+-----+-------------------+----------------+
- * 5 rows in set (0.00 sec)
+ * 6 rows in set (0.01 sec)
  */
-case class MailLog(id: Long, recipient: Long, donetext: String, createdate: Date, status: Int)
+case class MailLog(id: Long, recipient: Long, content: String, subject: String, createdate: Date, status: Int)
 
 object MailLog {
   val simple = {
     get[Long]("maillog.id") ~
       get[Long]("maillog.recipient") ~
-      get[String]("maillog.donetext") ~
+      get[String]("maillog.content") ~
+      get[String]("maillog.subject") ~
       get[Date]("maillog.createdate") ~
       get[Int]("maillog.status") map {
-        case id ~ recipient ~ donetext ~ createdate ~ status => MailLog(id, recipient, donetext, createdate, status)
+        case id ~ recipient ~ content ~ subject ~ createdate ~ status => MailLog(id, recipient, content, subject, createdate, status)
       }
   }
 
@@ -44,12 +46,13 @@ object MailLog {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          insert into maillog (recipient, donetext, createdate, status) values (
-          {recipient}, {donetext}, {createdate}, {status}
+          insert into maillog (recipient, content, subject, createdate, status) values (
+          {recipient}, {content}, {subject}, {createdate}, {status}
           )
         """).on(
           'recipient -> ml.recipient,
-          'donetext -> ml.donetext,
+          'content -> ml.content,
+          'subject -> ml.subject,
           'createdate -> new Date(),
           'status -> 1).executeInsert()
     }

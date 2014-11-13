@@ -30,7 +30,8 @@ CREATE TABLE `team` (
 CREATE TABLE `maillog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `recipient` int(11) DEFAULT NULL,
-  `donetext` text,
+  `subject` text,
+  `content` text,
   `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)

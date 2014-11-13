@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import com.typesafe.plugin._
 import play.api.Play.current
+import models.MailLog
 
 class EmailJobActor() extends Actor {
   def receive = {
@@ -44,8 +45,10 @@ class EmailJobActor() extends Actor {
     mail.setSubject(subject)
     mail.setRecipient(user.email)
     mail.setFrom("donetoday@idone.ch")
-    mail.sendHtml(html)
-
-    //println ("sent mail: " + html)
+    
+    if (doneseq.size > 0) {
+      mail.sendHtml(html)
+      MailLog.create(new MailLog(1, user.id, html, subject, null, -1))
+    }
   }
 }
