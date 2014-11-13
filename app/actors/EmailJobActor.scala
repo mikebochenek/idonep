@@ -32,23 +32,26 @@ class EmailJobActor() extends Actor {
     val doneseq = Done.findByDoneDay(user.email, sdf.format(new Date()).toLong)
 
     var html = "<html><body><h1>Done " + dateStr + "</h1>" + "<ul>"
-    
+
     for (done <- doneseq) {
       html += "<li>" + done.donetext + "</li>" //TODO probably need escaping for html...
     }
-    	
+
     html += "</ul></body></html>"
 
     val subject = "Done today: " + dateStr
-      
+
     val mail = use[MailerPlugin].email
     mail.setSubject(subject)
     mail.setRecipient(user.email)
     mail.setFrom("donetoday@idone.ch")
-    
-    if (doneseq.size > 0) {
+
+    if (doneseq.size > 0 && isValid(user.email)) {
       mail.sendHtml(html)
       MailLog.create(new MailLog(1, user.id, html, subject, null, -1))
     }
   }
+
+  /* http://stackoverflow.com/questions/13912597/validate-email-one-liner-in-scala */
+  def isValid(email: String): Boolean = """(\w+)@([\w\.]+)""".r.unapplySeq(email).isDefined
 }
