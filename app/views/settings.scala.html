@@ -7,6 +7,8 @@
     @helper.form(routes.Settings.save) {
 
   <div class="starter-template">
+    <h1>settings</h1>
+      	
     <h3>general</h3>
 
       <div class="row ">
@@ -20,8 +22,6 @@
   </div>
 
   <div class="starter-template">
-    <h1>settings</h1>
-      	
     <h3>change password</h3>
 
       <div class="row ">
@@ -33,6 +33,32 @@
         </div>
       </div>
   </div>
+
+  <div class="starter-template">
+    <h3>export data</h3>
+
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4">
+          <a href="settings_csv_export">download data export as a CSV file</a>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4">
+          <a href="settings_xml_export">download data export as an XML file</a>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4">
+          <a href="settings_json_export">download data export as a JSON file</a>
+        </div>
+      </div>
+      
+  </div>
+
+  <div class="starter-template">
+    <h3>coming soon.... </h3>
       	
       	<ul>
       	<li>general: language, emails, etc.</li>
@@ -43,7 +69,7 @@
       	<li>purge data: click here and do not log in for 120 days and we will purge all your data forever</li>
       	</ul>
       	
-
+  </div>
  
 	}
     </div><!-- /.container -->

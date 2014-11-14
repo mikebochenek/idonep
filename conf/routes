@@ -18,6 +18,9 @@ GET     /contact                            controllers.DoneList.contact
 GET     /reports                            controllers.Reports.load
 GET     /settings                           controllers.Settings.load
 POST    /settings                           controllers.Settings.save
+GET     /settings_csv_export                controllers.Settings.generateCSV
+GET     /settings_xml_export                controllers.Settings.generateXML
+GET     /settings_json_export               controllers.Settings.generateJSON
 
 
 GET      /api/donelist/:id   controllers.DoneList.getByDay(id: Long)

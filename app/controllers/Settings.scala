@@ -50,7 +50,12 @@ object Settings extends Controller with Secured {
   }
 
   def generateJSON = Action { implicit request =>
-
-    Ok("done")
+    Ok("done json")
+  }
+  def generateCSV = Action { implicit request =>
+    Ok("done csv")
+  }
+  def generateXML = Action { implicit request =>
+    Ok("done xml")
   }
 }
