@@ -10,6 +10,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import play.api.libs.json.Json
 
 import com.thoughtworks.xstream._
 
@@ -43,19 +44,32 @@ object Settings extends Controller with Secured {
     Ok("Hi %s %s".format(email, language))
   }
 
-  private val xstream = new XStream
-
-  def toXML[T](obj: T): String = {
-    xstream.toXML(obj)
+  def generateJSON = IsAuthenticated { username =>
+    implicit request => {
+      val all = Done.findAll(User.findByEmail(username).id)
+      Ok(Json.toJson(all.map(a => Json.toJson(a))))
+    }
   }
 
-  def generateJSON = Action { implicit request =>
-    Ok("done json")
+  def generateCSV = IsAuthenticated { username =>
+    implicit request => {
+      val all = Done.findAll(User.findByEmail(username).id)
+      val csvstr = all.mkString("\n")
+      val header = "id,owner,donetext,donedate,createdate,deleted,category,doneDay\n"
+
+      Ok(header + csvstr.replaceAll("Done[(]", "").replaceAll("[)]", "")) 
+      
+      //TODO kinda wrong because commas in the done text, breaks everything
+      //TODO simplified, but I want only starting 
+      //TODO or better use a real library - i.e. http://code.google.com/p/opencsv/
+    }
   }
-  def generateCSV = Action { implicit request =>
-    Ok("done csv")
-  }
-  def generateXML = Action { implicit request =>
-    Ok("done xml")
+
+  def generateXML = IsAuthenticated { username =>
+    implicit request => {
+      val xstream = new XStream
+      val all = Done.findAll(User.findByEmail(username).id)
+      Ok(xstream.toXML(all))
+    }
   }
 }
