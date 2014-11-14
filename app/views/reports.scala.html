@@ -8,7 +8,8 @@
 		@for((deed, index) <- deeds.zipWithIndex)  {	
 		  <tr>
 		  <td>@index</td>
-		  <td>@deed.donedate.format("dd MMM YYYY")</td>
+		  <td>@deed.donedate.format("dd MMM YYYY HH:MM")</td>
+		  <td>@deed.doneDay</td>
 		  <td style="text-align: left;">@deed.donetext</td>
 		  </tr>
 		}
