@@ -61,7 +61,7 @@ object User {
     DB.withConnection { implicit connection =>
       SQL(
         """
-         update user set lastlogindate = {lastlogindate} user where 
+         update user set lastlogindate = {lastlogindate} where 
          email = {email} 
         """).on(
           'email -> email,
