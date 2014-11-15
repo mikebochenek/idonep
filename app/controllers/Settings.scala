@@ -51,8 +51,8 @@ object Settings extends Controller with Secured {
 
   def save = Action { implicit request =>
     val (email, language) = settingsForm.bindFromRequest.get
-    println(email)
-    println(language)
+    
+    Logger.info("email:" + email + " language:" + language)
     Ok("Hi %s %s".format(email, language))
   }
 

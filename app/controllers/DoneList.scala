@@ -11,6 +11,7 @@ import java.util.Date
 import models.User
 import models.Tag
 import models.DoneTag
+import play.api.Logger
 
 object DoneList extends Controller with Secured {
 
@@ -37,7 +38,7 @@ object DoneList extends Controller with Secured {
     implicit request => {
       val txt = (request.body.asJson.get \ "donetext")
       val doneday = (request.body.asJson.get \ "doneday")
-      println("yup, we are in the create now with " + txt.as[String] + " on " + doneday.as[String].toInt)
+      Logger.info("yup, we are in the create now with " + txt.as[String] + " on " + doneday.as[String].toInt)
       
       val id = User.findByEmail(username).id
       val tags = Tag.findAll(id)
@@ -50,11 +51,11 @@ object DoneList extends Controller with Secured {
       for (tag <- newtags) {
         if (tags.contains(tag)) {
           // if existing, than assign
-          println ("// if existing, than assign")
+          Logger.info ("// if existing, than assign")
         } else {
           // compare to existing tags, create if needed
           val newlycreatetag = Tag.create(new Tag(0, id, tag.substring(1), null, false))
-          println ("// compare to existing tags, create if needed  " + newlycreatetag)
+          Logger.info ("// compare to existing tags, create if needed  " + newlycreatetag)
           DoneTag.create(new DoneTag(0, newlycreatetag.get, newDone.get, null, false))
         }
       }

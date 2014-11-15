@@ -13,6 +13,7 @@ import play.api.libs.json.JsObject
 import play.api.libs.json.JsString
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
+import play.api.Logger
 
 /**
  * mysql> describe done;
@@ -60,7 +61,7 @@ object Done {
 
   /** Retrieve all done items for a given email (owner) and doneDay */
   def findByDoneDay(email: String, doneday: Long): Seq[Done] = {
-    println (email + " " + doneday + " .... ")
+    Logger.info ("findByDoneDay for email:" + email + " with doneday:" + doneday)
     DB.withConnection { implicit connection =>
       SQL("select d.id, d.owner, d.donetext, d.donedate, d.createdate, d.deleted, d.category, d.doneDay " 
           + " from done d join user u where d.owner = u.id and d.deleted = 0 " 

@@ -6,6 +6,7 @@ import anorm._
 import anorm.SqlParser._
 import scala.language.postfixOps
 import java.util.Date
+import play.api.Logger
 
 /**
  * mysql> describe user
@@ -100,7 +101,7 @@ object User {
   }
 
   def create(email: String, password: String, password2: String) = {
-    println("creating user " + email)
+    Logger.info ("creating user with email:" + email)
     
     DB.withConnection { implicit connection =>
       SQL(

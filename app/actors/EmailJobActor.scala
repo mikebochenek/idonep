@@ -8,6 +8,7 @@ import java.util.Date
 import com.typesafe.plugin._
 import play.api.Play.current
 import models.MailLog
+import play.api.Logger
 
 class EmailJobActor() extends Actor {
   def receive = {
@@ -26,7 +27,7 @@ class EmailJobActor() extends Actor {
   val prettySdf = new SimpleDateFormat("EEE, dd MMM yyyy")
 
   def sendemail(user: User) {
-    println("processing " + user.email)
+    Logger.info ("processing sendemail to email:" + user.email)
 
     val dateStr = prettySdf.format(new Date())
     val doneseq = Done.findByDoneDay(user.email, sdf.format(new Date()).toLong)
