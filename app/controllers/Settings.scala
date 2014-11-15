@@ -50,7 +50,7 @@ object Settings extends Controller with Secured {
       val (email, language, password, passwordnew1, passwordnew2, newusertarget) = settingsForm.bindFromRequest.get
 
       Logger.debug("email:" + email + " language:" + language)
-      //Logger.info("password:" + password + " passwordnew1:" + passwordnew1 + " passwordnew2:" + passwordnew2)
+      //Logger.debug("password:" + password + " passwordnew1:" + passwordnew1 + " passwordnew2:" + passwordnew2)
 
       if (password != null && password.trim.length > 0 
           && passwordnew1 != null && passwordnew1.trim.length > 0 && passwordnew1.equals(passwordnew2)) {
@@ -61,6 +61,12 @@ object Settings extends Controller with Secured {
       } //TODO only handles happy path for now
 
       Logger.debug("newusertarget:" + newusertarget)
+      if (newusertarget != null && newusertarget.trim.length > 0) {
+        val targetId = User.findByEmail(newusertarget).id
+        Team.create(User.findByEmail(username).id, targetId)
+        Logger.info("added new target:" + newusertarget + " targetId:"+ targetId)
+      } //TODO only works with happy flow
+      //TODO user.findbyemail can fail with [RuntimeException: SqlMappingError(No rows when expecting a single one)]
       
       Ok("Hi %s %s".format(email, language))
     }
