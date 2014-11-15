@@ -27,7 +27,7 @@ object Settings extends Controller with Secured {
       val confirmedOwners = Team.findMyOwners(me.id, 1)
       val unconfirmedOwners = Team.findMyOwners(me.id, 0)
       
-      Logger.info("confirmedTargets:" + confirmedTargets.size 
+      Logger.debug("confirmedTargets:" + confirmedTargets.size 
           + " unconfirmedTargets:" + unconfirmedTargets.size
           + " confirmedOwners: " + confirmedOwners.size
           + " unconfirmedOwners: " + unconfirmedOwners.size)
@@ -45,13 +45,25 @@ object Settings extends Controller with Secured {
       "passwordnew2" -> text,
       "newusertarget" -> text))
 
-  def save = Action { implicit request =>
-    val (email, language, password, passwordnew1, passwordnew2, newusertarget) = settingsForm.bindFromRequest.get
-    
-    Logger.info("email:" + email + " language:" + language)
-    //Logger.info("password:" + password + " passwordnew1:" + passwordnew1 + " passwordnew2:" + passwordnew2)
-    Logger.info("newusertarget:" + newusertarget)
-    Ok("Hi %s %s".format(email, language))
+  def save = IsAuthenticated { username =>
+    implicit request => { 
+      val (email, language, password, passwordnew1, passwordnew2, newusertarget) = settingsForm.bindFromRequest.get
+
+      Logger.debug("email:" + email + " language:" + language)
+      //Logger.info("password:" + password + " passwordnew1:" + passwordnew1 + " passwordnew2:" + passwordnew2)
+
+      if (password != null && password.trim.length > 0 
+          && passwordnew1 != null && passwordnew1.trim.length > 0 && passwordnew1.equals(passwordnew2)) {
+        Logger.info("changing password for email:" + username)
+        if (username.equals(User.authenticate(username, password).get.email)) {
+          User.updatepassword(username, passwordnew1)
+        }
+      } //TODO only handles happy path for now
+
+      Logger.debug("newusertarget:" + newusertarget)
+      
+      Ok("Hi %s %s".format(email, language))
+    }
   }
 
   def generateJSON = IsAuthenticated { username =>

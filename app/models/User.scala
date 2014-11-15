@@ -70,6 +70,15 @@ object User {
     }
   }
 
+  def updatepassword(email: String, password: String) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        "update user set password = {password} where email = {email} ").on(
+          'email -> email,
+          'password -> hash(password)).executeUpdate
+    }
+  }
+  
   def authenticate(email: String, password: String): Option[User] = {
     DB.withConnection { implicit connection =>
       SQL(
