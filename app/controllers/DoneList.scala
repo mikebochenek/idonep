@@ -59,6 +59,8 @@ object DoneList extends Controller with Secured {
           DoneTag.create(new DoneTag(0, newlycreatetag.get, newDone.get, null, false))
         }
       }
+      
+      User.updatelastlogindate(username) // not entirely correct, but at least gives us an idea
 
       Ok("ok"/*Json.toJson(newDone)*/)
     }
