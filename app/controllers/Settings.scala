@@ -11,6 +11,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.json.Json
+import play.api.Logger
 
 import com.thoughtworks.xstream._
 
@@ -20,8 +21,19 @@ import views._
 object Settings extends Controller with Secured {
   def load() = IsAuthenticated { username =>
     implicit request => {
+      val id = User.findByEmail(username).id
+      val confirmedTargets = Team.findMyTargets(id, 1)
+      val unconfirmedTargets = Team.findMyTargets(id, 0)
+      val confirmedOwners = Team.findMyOwners(id, 1)
+      val unconfirmedOwners = Team.findMyOwners(id, 0)
+      
+      Logger.info("confirmedTargets:" + confirmedTargets.size 
+          + " unconfirmedTargets:" + unconfirmedTargets.size
+          + " confirmedOwners: " + confirmedOwners.size
+          + " unconfirmedOwners: " + unconfirmedOwners.size)
+      
       settingsForm.fill("test@eme.com", "finish")
-      Ok(views.html.settings(settingsForm))
+      Ok(views.html.settings(settingsForm, confirmedTargets))
     }
   }
 
