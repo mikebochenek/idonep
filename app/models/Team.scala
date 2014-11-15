@@ -58,6 +58,38 @@ object Team {
     }
   }
 
+  def findMyTargets(owner: Long, status: Int): Seq[User] = {
+    DB.withConnection { implicit connection =>
+      SQL("select u.id, u.email, u.username, u.password from user u "
+    		  + " join team t where u.id = t.target and t.owner = {owner} " 
+    		  + " and t.status = {status} and t.deleted = 0 ").on(
+        'owner -> owner, 'status -> status).as(User.simple *)
+    }
+  }
+
+  def findMyOwners(target: Long, status: Int): Seq[User] = {
+    DB.withConnection { implicit connection =>
+      SQL("select u.id, u.email, u.username, u.password from user u "
+    		  + " join team t where u.id = t.owner and t.target = {target} " 
+    		  + " and t.status = {status} and t.deleted = 0 ").on(
+        'target -> target, 'status -> status).as(User.simple *)
+    }
+  }
+
+  def updatestatus(owner: Long, target: Long, status: Int) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+         update team set status = {status} where 
+         owner = {owner} and target = {target}
+        """).on(
+          'owner -> owner,
+          'target -> target,
+          'status -> status).executeUpdate
+    }
+  }
+  
+  
   implicit val teamReads = Json.reads[Team]
   implicit val teamWrites = Json.writes[Team]
 
