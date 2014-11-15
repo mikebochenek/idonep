@@ -1,4 +1,6 @@
-@(form: Form[(String,String)], me: User, confirmedTargets: Seq[User])(implicit flash: Flash, session: Session)
+@(form: Form[(String,String,String,String,String,String)], me: User, 
+	confirmedTargets: Seq[User], unconfirmedTargets: Seq[User],
+	confirmedOwners: Seq[User], unconfirmedOwnerss: Seq[User])(implicit flash: Flash, session: Session)
 
 @main(title = "settings") {
 
@@ -64,6 +66,14 @@
           <div>confirmed team members: @confirmedTargets.size</div>
         </div>
       </div>
+      
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4">
+          <input class="form-control span4" type="text" name="newusertarget" id="newusertarget" placeholder="new team member email">
+          <button class="span4 btn btn-primary" type="submit" id="generalsavebutton">Add New</button>
+        </div>
+      </div>
+      
   </div>
 
 

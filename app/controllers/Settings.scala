@@ -32,26 +32,25 @@ object Settings extends Controller with Secured {
           + " confirmedOwners: " + confirmedOwners.size
           + " unconfirmedOwners: " + unconfirmedOwners.size)
       
-      Ok(views.html.settings(settingsForm, me, confirmedTargets))
+      Ok(views.html.settings(settingsForm, me, confirmedTargets, unconfirmedTargets, confirmedOwners, unconfirmedOwners))
     }
   }
 
   val settingsForm = Form(
     tuple(
       "email" -> text,
-      "language" -> text))
-
-  /*def save = Action { implicit request =>
-    settingsForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.login(formWithErrors)),
-      user => Redirect(routes.DoneList.index).withSession("email" -> user._1)
-    )
-  }*/
+      "language" -> text,
+      "password" -> text,
+      "passwordnew1" -> text,
+      "passwordnew2" -> text,
+      "newusertarget" -> text))
 
   def save = Action { implicit request =>
-    val (email, language) = settingsForm.bindFromRequest.get
+    val (email, language, password, passwordnew1, passwordnew2, newusertarget) = settingsForm.bindFromRequest.get
     
     Logger.info("email:" + email + " language:" + language)
+    //Logger.info("password:" + password + " passwordnew1:" + passwordnew1 + " passwordnew2:" + passwordnew2)
+    Logger.info("newusertarget:" + newusertarget)
     Ok("Hi %s %s".format(email, language))
   }
 
