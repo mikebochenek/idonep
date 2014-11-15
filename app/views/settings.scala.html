@@ -1,6 +1,6 @@
 @(form: Form[(String,String,String,String,String,String)], me: User, 
 	confirmedTargets: Seq[User], unconfirmedTargets: Seq[User],
-	confirmedOwners: Seq[User], unconfirmedOwnerss: Seq[User])(implicit flash: Flash, session: Session)
+	confirmedOwners: Seq[User], unconfirmedOwners: Seq[User])(implicit flash: Flash, session: Session)
 
 @main(title = "settings") {
 
@@ -61,11 +61,54 @@
   <div class="starter-template">
     <h3>team</h3>
 
+      @if(!confirmedTargets.isEmpty) {
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
-          <div>confirmed team members: @confirmedTargets.size</div>
+        <div class="col-sm-4 col-md-offset-4 well">
+	      <div>The following users will receive your updates:</div><ul>
+          @for(u <- confirmedTargets) {
+            <li>@u.email</li>
+          }
+          </ul>
         </div>
       </div>
+      }
+
+      @if(!unconfirmedTargets.isEmpty) {
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4 well">
+	      <div>The following users need to confirm your request (before they receive your updates):</div><ul>
+          @for(u <- unconfirmedTargets) {
+            <li>@u.email</li>
+          }
+          </ul>
+        </div>
+      </div>
+      }
+
+      @if(!confirmedOwners.isEmpty) {
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4 well">
+	      <div>You will receive updates from the following users:</div><ul>
+          @for(u <- confirmedOwners) {
+            <li>@u.email</li>
+          }
+          </ul>
+        </div>
+      </div>
+      }
+
+      @if(!unconfirmedOwners.isEmpty) {
+      <div class="row ">
+        <div class="col-sm-4 col-md-offset-4 well">
+	      <div>You need to confirm that you want to receive updates from the following users:</div><ul>
+          @for(u <- unconfirmedOwners) {
+            <li>@u.email</li>
+          }
+          </ul>
+        </div>
+      </div>
+      }
+
       
       <div class="row ">
         <div class="col-sm-4 col-md-offset-4">
@@ -81,11 +124,7 @@
     <h3>coming soon.... </h3>
       	
       	<ul>
-      	<li>general: language, emails, etc.</li>
-      	<li>profile: email address, password, etc.</li>
-      	<li>team: who gets to see your daily reports, etc.</li>
       	<li>integrations: github, zenhub, jira, todoist, etc.</li>
-      	<li>download all data as csv, json, xml</li>
       	<li>purge data: click here and do not log in for 120 days and we will purge all your data forever</li>
       	</ul>
       	
