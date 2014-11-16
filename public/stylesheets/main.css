@@ -13,3 +13,17 @@ h1 {
 .mycenter {
 	  text-align: center;
 }
+
+
+.animate-show {
+  -webkit-transition:all linear 0.1s;
+  transition:all linear 0.1s;
+  opacity:1;
+  background:white;
+}
+
+.animate-show.ng-hide {
+  -webkit-transition:all linear 0.3s;
+  transition:all linear 0.3s;
+  opacity:0;
+}

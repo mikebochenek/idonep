@@ -1,5 +1,5 @@
 
-var app = angular.module("app", ["ngResource", "ngRoute"])
+var app = angular.module("app", ["ngResource", "ngRoute", "ngAnimate"])
 	.constant("apiUrl", "http://localhost:9000/api")
 	.config(["$routeProvider", function($routeProvider) {
 		return $routeProvider.when("/", {
@@ -61,6 +61,7 @@ app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl",
 	};
 
 	$scope.init = function() {
+		$scope.show=true;
 	    var Celebrities = $resource(apiUrl + "/donelist/" + $scope.doneday); 
 	    $scope.celebrities = Celebrities.query(); 
 	};
@@ -72,7 +73,7 @@ app.controller("ListCtrl", ["$scope", "$resource", "$timeout", "apiUrl",
 		create.save({'donetext' : $scope.donetext, 'doneday' : $scope.doneday}); 
 		$scope.donetext=''; 
 		$scope.show=false;
-		$timeout(function() { $scope.init();  }, 500); // go back to public/html/main.html
+		$timeout(function() { $scope.init();  }, 300); // go back to public/html/main.html
 		//TODO should I implement a success() or simply sleep for 500ms?
 	};
 }]);
