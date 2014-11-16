@@ -20,7 +20,7 @@ object Admin extends Controller with Secured {
       val id = User.findByEmail(username).id
       if (username.contains("bochenek")) {
         val stats = AdminHelper.generateStats()
-        Ok(views.html.iadmin())
+        Ok(views.html.iadmin(stats))
       } else {
         Ok(views.html.index())
       }
