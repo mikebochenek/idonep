@@ -22,6 +22,8 @@ GET     /settings_csv_export                controllers.Settings.generateCSV
 GET     /settings_xml_export                controllers.Settings.generateXML
 GET     /settings_json_export               controllers.Settings.generateJSON
 
+GET     /iadmin                             controllers.Admin.index
+
 
 GET      /api/donelist/:id   controllers.DoneList.getByDay(id: Long)
 POST     /api/donelist/new   controllers.DoneList.create
