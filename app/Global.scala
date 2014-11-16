@@ -7,11 +7,39 @@ import models.User
 import actors.EmailJobActor
 import java.util.Calendar
 import java.util.Date
+import play.api._
+import play.api.mvc._
+import play.api.http.HeaderNames
+import scala.concurrent.Future
+import play.api.Logger
+
+// http://stackoverflow.com/questions/23525022/play-2-2-for-scala-modifying-acceptlanguage-http-request-header-with-scalainte
+object LangFromSubdomain extends Filter {
+    def apply(next: (RequestHeader) => Future[SimpleResult])(request: RequestHeader): Future[SimpleResult] = {
+
+    val subdomainLanguage = request.domain.toString.substring(0, 3) match {
+      case "it." => "it"
+      case "es." => "es"
+      case "de." => "de"
+      case "fr." => "fr"
+      case _ => "en"
+    }
+
+    val newHeaders = new Headers { val data = (request.headers.toMap
+        + (HeaderNames.ACCEPT_LANGUAGE -> Seq(subdomainLanguage))).toList }
+
+    val newRequestHeader = request.copy(headers = newHeaders)
+    
+    //Logger.info("---> " + subdomainLanguage)
+
+    next(newRequestHeader)
+  }
+}
 
 /**
  * Application global object, used here to schedule jobs on application start-up.
  */
-object Global extends GlobalSettings {
+object Global extends WithFilters(LangFromSubdomain) {
 
   override def onStart(application: play.api.Application) {
 
