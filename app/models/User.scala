@@ -127,6 +127,11 @@ object User {
     }
   }
 
+  def countAll(): Long = {
+    DB.withConnection { implicit connection =>
+      SQL("select count(*) from user ").as(scalar[Long].single)
+    }
+  }
   
   def hash(str: String): String = {
     val md = java.security.MessageDigest.getInstance("SHA-1")

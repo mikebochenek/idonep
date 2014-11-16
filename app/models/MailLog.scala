@@ -58,6 +58,12 @@ object MailLog {
     }
   }
 
+  def countAll(): Long = {
+    DB.withConnection { implicit connection =>
+      SQL("select count(*) from maillog ").as(scalar[Long].single)
+    }
+  }
+  
   implicit val mailLogReads = Json.reads[MailLog]
   implicit val mailLogWrites = Json.writes[MailLog]
 

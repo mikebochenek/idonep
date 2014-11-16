@@ -90,6 +90,12 @@ object Done {
     }
   }
 
+  def countAll(): Long = {
+    DB.withConnection { implicit connection =>
+      SQL("select count(*) from done ").as(scalar[Long].single)
+    }
+  }
+  
   implicit val doneReads = Json.reads[Done]
   implicit val doneWrites = Json.writes[Done]
 

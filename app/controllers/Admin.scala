@@ -19,6 +19,7 @@ object Admin extends Controller with Secured {
     implicit request => {
       val id = User.findByEmail(username).id
       if (username.contains("bochenek")) {
+        val stats = AdminHelper.generateStats()
         Ok(views.html.iadmin())
       } else {
         Ok(views.html.index())
