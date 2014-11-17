@@ -1,1 +1,11 @@
+
+# main
 application.name = iDone
+menu.home = Home
+menu.myteam = My Team
+menu.about = About
+menu.contact = Contact
+menu.reports = Reports
+menu.settings = Settings
+menu.logout = Logout
+menu.login = Login
