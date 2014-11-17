@@ -45,14 +45,16 @@ class EmailJobActor() extends Actor {
     val mail = use[MailerPlugin].email
     mail.setSubject(subject)
     mail.setRecipient(user.email)
-    mail.setFrom("donetoday@idone.ch")
+    mail.setFrom("info@idone.ch")
 
+    Logger.info("about to send email to: " + user.email + " with " + doneseq.size + " deeds")
     if (doneseq.size > 0 && isValid(user.email)) {
       mail.sendHtml(html)
       MailLog.create(new MailLog(1, user.id, html, subject, null, -1))
     }
   }
 
-  /* http://stackoverflow.com/questions/13912597/validate-email-one-liner-in-scala */
-  def isValid(email: String): Boolean = """(\w+)@([\w\.]+)""".r.unapplySeq(email).isDefined
+  /* http://stackoverflow.com/questions/13912597/validate-email-one-liner-in-scala
+   * http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address */
+  def isValid(email: String): Boolean = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$".r.unapplySeq(email).isDefined
 }
