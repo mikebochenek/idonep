@@ -9,8 +9,7 @@
         <p class="lead mycenter">Today I've completed the following tasks</p>
         
         <div class="row mycenter" >
-         <div class="col-sm-3" ></div>
-         <div class="col-sm-6" >         
+         <div class="col-sm-8 col-md-offset-2">         
           <ul class="list-group" style="text-align: left;">
             <li ng-repeat="celebrity in celebrities | orderBy:['createdate']" class="list-group-item"><img src="@routes.Assets.at("img/check_box.png")" />{{celebrity.donetext}}</li>
             
@@ -28,7 +27,6 @@
            <button type="button" class="btn btn-primary">Save</button>
            <button type="button" class="btn btn-primary">Finalize & Submit</button>
          </div><!-- /.col-sm-6 -->
-         <div class="col-sm-3" ></div>
         </div>
 }.getOrElse{
             <h1>you should probably <a href="login">login</a></h1>

@@ -14,7 +14,7 @@
     <h3>general</h3>
 
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
+        <div class="col-sm-8 col-md-offset-2">
           <input class="form-control span4" type="text" name="email" id="email" value="@me.email">
           <input class="form-control span4" type="text" name="language" id="language">
           <button class="span4 btn btn-primary" type="submit" id="generalsavebutton">Save</button>
@@ -26,7 +26,7 @@
     <h3>change password</h3>
 
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
+        <div class="col-sm-8 col-md-offset-2">
           <input class="form-control span4" type="password" name="password" id="password" placeholder="Password">
           <input class="form-control span4" type="password" name="passwordnew1" id="passwordnew1" placeholder="new password">
           <input class="form-control span4" type="password" name="passwordnew2" id="passwordnew2" placeholder="re-enter new password">
@@ -39,19 +39,19 @@
     <h3>export data</h3>
 
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
+        <div class="col-sm-8 col-md-offset-2">
           <a href="settings_csv_export">download data export as a CSV file</a>
         </div>
       </div>
 
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
+        <div class="col-sm-8 col-md-offset-2">
           <a href="settings_xml_export">download data export as an XML file</a>
         </div>
       </div>
 
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
+        <div class="col-sm-8 col-md-offset-2">
           <a href="settings_json_export">download data export as a JSON file</a>
         </div>
       </div>
@@ -63,7 +63,7 @@
 
       @if(!confirmedTargets.isEmpty) {
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4 well">
+        <div class="col-sm-8 col-md-offset-2 well">
 	      <div>The following users will receive your updates:</div><ul>
           @for(u <- confirmedTargets) {
             <li>@u.email</li>
@@ -75,7 +75,7 @@
 
       @if(!unconfirmedTargets.isEmpty) {
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4 well">
+        <div class="col-sm-8 col-md-offset-2 well">
 	      <div>The following users need to confirm your request (before they receive your updates):</div><ul>
           @for(u <- unconfirmedTargets) {
             <li>@u.email</li>
@@ -87,7 +87,7 @@
 
       @if(!confirmedOwners.isEmpty) {
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4 well">
+        <div class="col-sm-8 col-md-offset-2 well">
 	      <div>You will receive updates from the following users:</div><ul>
           @for(u <- confirmedOwners) {
             <li>@u.email</li>
@@ -99,7 +99,7 @@
 
       @if(!unconfirmedOwners.isEmpty) {
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4 well">
+        <div class="col-sm-8 col-md-offset-2 well">
 	      <div>You need to confirm that you want to receive updates from the following users:</div><ul>
           @for(u <- unconfirmedOwners) {
             <li>@u.email</li>
@@ -111,7 +111,7 @@
 
       
       <div class="row ">
-        <div class="col-sm-4 col-md-offset-4">
+        <div class="col-sm-8 col-md-offset-2">
           <input class="form-control span4" type="text" name="newusertarget" id="newusertarget" placeholder="new team member email">
           <button class="span4 btn btn-primary" type="submit" id="generalsavebutton">Add New</button>
         </div>
