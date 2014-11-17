@@ -31,6 +31,11 @@ import play.api.Logger
 
 case class User(id: Long, email: String, username: String, password: String)
 
+case class UserFull(id: Long, createdate: Date, lastlogindate: Date, deleted: Boolean, 
+    password: String, settings: String, email: String, username: String, ttype: String,
+    openidtoken: String)
+
+
 object User {
 
   /**
@@ -43,6 +48,30 @@ object User {
       get[String]("user.password") map {
         case id ~ email ~ username ~ password => User(id, email, username, password)
       }
+  }
+  
+  val all = { 
+    get[Long]("user.id") ~
+      get[Option[Date]]("user.createdate") ~
+      get[Option[Date]]("user.lastlogindate") ~
+      get[Option[Boolean]]("user.deleted") ~
+      get[String]("user.password") ~
+      get[Option[String]]("user.settings") ~
+      get[String]("user.email") ~
+      get[String]("user.username") ~
+      get[Option[String]]("user.type") ~
+      get[Option[String]]("user.openidtoken") map {
+        case id ~ createdate ~ lastlogindate ~ deleted ~ password ~ settings ~ email ~ username ~ ttype ~ openidtoken => 
+          UserFull(id, createdate.getOrElse(null), lastlogindate.getOrElse(null), deleted.getOrElse(false), 
+              password, settings.getOrElse(null), email, username, ttype.getOrElse(null), openidtoken.getOrElse(null))
+      }
+  }
+  
+  def getFullUser(email: String): UserFull = {
+    DB.withConnection { implicit connection =>
+      SQL("select id, createdate, lastlogindate, deleted, password, settings, email, username, type, openidtoken from user where email = {email}").on(
+        'email -> email).as(User.all.single)
+    }
   }
 
   def findByEmail(email: String): User = {

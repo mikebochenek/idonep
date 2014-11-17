@@ -22,6 +22,9 @@ object Settings extends Controller with Secured {
   def load() = IsAuthenticated { username =>
     implicit request => {
       val me = User.findByEmail(username)
+      
+      val fullUser = User.getFullUser(username)
+      
       val confirmedTargets = Team.findMyTargets(me.id, 1)
       val unconfirmedTargets = Team.findMyTargets(me.id, 0)
       val confirmedOwners = Team.findMyOwners(me.id, 1)
