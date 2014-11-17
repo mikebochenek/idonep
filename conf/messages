@@ -16,3 +16,12 @@ menu.login = Login
 # donelist
 finalizesubmit = Finalize & Submit
 doneheader = Today I''ve completed the following tasks
+
+# settings
+settings = Settings
+general = General
+changepassword = Change Password
+password = password
+newpassword = new password
+newpassword2 = re-enter new password
+exportdata = Export Data
