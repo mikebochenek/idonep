@@ -6,7 +6,7 @@
       <div class="starter-template">
 @session.get("email").map { user =>
         <h1><button data-ng-click="decreasedate()" class="glyphicon glyphicon-step-backward"></button><span data-ng-model="doneday">{{doneday}}</span><button data-ng-click="increasedate()" class="glyphicon glyphicon-step-forward"></button></h1>
-        <p class="lead mycenter">Today I've completed the following tasks</p>
+        <p class="lead mycenter">@Messages("doneheader")</p>
         
         <div class="row mycenter" >
          <div class="col-sm-8 col-md-offset-2">         
@@ -17,15 +17,15 @@
             <form role="form" class="animate-show" ng-show="show">
                <img src="@routes.Assets.at("img/check_box.png")" />
                <input id="donetext" name="donetext" type="text" data-ng-model="donetext" placeholder="task text" size="50" ng-required/>
-               <button data-ng-click="add()" class="btn btn-primary" type="submit">add</button>
+               <button data-ng-click="add()" class="btn btn-primary" type="submit">@Messages("add")</button>
             </form>
            </span>
            </li>
             
           </ul>
 
-           <button type="button" class="btn btn-primary">Save</button>
-           <button type="button" class="btn btn-primary">Finalize & Submit</button>
+           <button type="button" class="btn btn-primary">@Messages("save")</button>
+           <button type="button" class="btn btn-primary">@Messages("finalizesubmit")</button>
          </div><!-- /.col-sm-6 -->
         </div>
 }.getOrElse{

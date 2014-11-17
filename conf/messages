@@ -1,4 +1,7 @@
 
+save = Save
+add = Add
+
 # main
 application.name = iDone
 menu.home = Home
@@ -9,3 +12,7 @@ menu.reports = Reports
 menu.settings = Settings
 menu.logout = Logout
 menu.login = Login
+
+# donelist
+finalizesubmit = Finalize & Submit
+doneheader = Today I''ve completed the following tasks
