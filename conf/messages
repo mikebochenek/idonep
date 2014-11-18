@@ -25,6 +25,19 @@ password = password
 newpassword = new password
 newpassword2 = re-enter new password
 exportdata = Export Data
+downloadcsv = download data export as a CSV file
+downloadxml = download data export as an XML file
+downloadjson = download data export as a JSON file
+team = Team
+confirmedtargetslabel = The following users will receive your updates:
+unconfirmedtargetslabel = The following users need to confirm your request (before they receive your updates):
+confirmedowners = You will receive updates from the following users:
+unconfirmedowners = You need to confirm that you want to receive updates from the following users:
+newteamemail = new team member email
+addnew = Add New
+comingsoon = Coming soon.... 
+integrations = integrations: github, zenhub, jira, todoist, etc.
+purgedata = purge data: click here and do not log in for 120 days and we will purge all your data forever
 
 # login
 invalidlogin = Invalid email or password

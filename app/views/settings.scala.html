@@ -40,31 +40,31 @@
 
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2">
-          <a href="settings_csv_export">download data export as a CSV file</a>
+          <a href="settings_csv_export">@Messages("downloadcsv")</a>
         </div>
       </div>
 
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2">
-          <a href="settings_xml_export">download data export as an XML file</a>
+          <a href="settings_xml_export">@Messages("downloadxml")</a>
         </div>
       </div>
 
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2">
-          <a href="settings_json_export">download data export as a JSON file</a>
+          <a href="settings_json_export">@Messages("downloadjson")</a>
         </div>
       </div>
       
   </div>
 
   <div class="starter-template">
-    <h3>team</h3>
+    <h3>@Messages("team")</h3>
 
       @if(!confirmedTargets.isEmpty) {
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2 well">
-	      <div>The following users will receive your updates:</div><ul>
+	      <div>@Messages("confirmedtargetslabel")</div><ul>
           @for(u <- confirmedTargets) {
             <li>@u.email</li>
           }
@@ -76,7 +76,7 @@
       @if(!unconfirmedTargets.isEmpty) {
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2 well">
-	      <div>The following users need to confirm your request (before they receive your updates):</div><ul>
+	      <div>@Messages("unconfirmedtargetslabel")</div><ul>
           @for(u <- unconfirmedTargets) {
             <li>@u.email</li>
           }
@@ -88,7 +88,7 @@
       @if(!confirmedOwners.isEmpty) {
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2 well">
-	      <div>You will receive updates from the following users:</div><ul>
+	      <div>@Messages("confirmedowners")</div><ul>
           @for(u <- confirmedOwners) {
             <li>@u.email</li>
           }
@@ -100,7 +100,7 @@
       @if(!unconfirmedOwners.isEmpty) {
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2 well">
-	      <div>You need to confirm that you want to receive updates from the following users:</div><ul>
+	      <div>@Messages("unconfirmedowners")</div><ul>
           @for(u <- unconfirmedOwners) {
             <li>@u.email</li>
           }
@@ -112,8 +112,8 @@
       
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2">
-          <input class="form-control span4" type="text" name="newusertarget" id="newusertarget" placeholder="new team member email">
-          <button class="span4 btn btn-primary" type="submit" id="generalsavebutton">Add New</button>
+          <input class="form-control span4" type="text" name="newusertarget" id="newusertarget" placeholder="@Messages("newteamemail")">
+          <button class="span4 btn btn-primary" type="submit" id="generalsavebutton">@Messages("addnew")</button>
         </div>
       </div>
       
@@ -121,11 +121,11 @@
 
 
   <div class="starter-template">
-    <h3>coming soon.... </h3>
+    <h3>@Messages("comingsoon")</h3>
       	
       	<ul>
-      	<li>integrations: github, zenhub, jira, todoist, etc.</li>
-      	<li>purge data: click here and do not log in for 120 days and we will purge all your data forever</li>
+      	<li>@Messages("integrations")</li>
+      	<li>@Messages("purgedata")</li>
       	</ul>
       	
   </div>
