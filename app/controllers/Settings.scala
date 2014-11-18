@@ -71,7 +71,7 @@ object Settings extends Controller with Secured {
       } //TODO only works with happy flow
       //TODO user.findbyemail can fail with [RuntimeException: SqlMappingError(No rows when expecting a single one)]
       
-      Ok("Hi %s %s".format(email, language))
+      Redirect(routes.Settings.load)
     }
   }
 
