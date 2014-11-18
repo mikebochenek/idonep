@@ -29,3 +29,8 @@ exportdata = Export Data
 # login
 invalidlogin = Invalid email or password
 createuserfailed = email already in use or passwords not matching
+email = Email
+rememberme = Remember me
+signin = Sign in
+donthaveaccount = don't have an account yet? click here to
+createfreeaccount = create a free account
