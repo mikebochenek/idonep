@@ -8,7 +8,7 @@
       
         @helper.form(routes.Application.submitcreateuser) {
             
-            <h1>Create new account</h1>
+            <h1>@Messages("createnewaccount")</h1>
             
             @form.globalError.map { error =>
                 <p class="error">
@@ -26,20 +26,23 @@
               <div class="col-sm-4" ></div>
             
               <div class="col-sm-4">
-                <input class="form-control span4" type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
-                <input class="form-control span4" type="password" name="password" id="password" placeholder="Password">
-                <input class="form-control span4" type="password2" name="password2" id="password2" placeholder="re-enter Password">
-                <button class="btn btn-primary" type="submit" id="createbutton">Create</button>
+                <input class="form-control span4" type="email" name="email" placeholder="@Messages("email")" id="email" value="@form("email").value">
+                <input class="form-control span4" type="password" name="password" id="password" placeholder="@Messages("password")">
+                <input class="form-control span4" type="password2" name="password2" id="password2" placeholder="@Messages("reenterpassword")">
+                <button class="btn btn-primary" type="submit" id="createbutton">@Messages("create")</button>
               </div>
             
               <div class="col-sm-4" ></div>
             
             </div>
+            
+            <div class="row mycenter" >
+              <div class="col-sm-8 col-md-offset-2">         
+		        <small>@Messages("passwordsarehashed")</small>
+		      </div>
+            </div>
         }
         
-        <p class="note">
-            note that passwords are stored in a secure hash, and you we cannot send you a forgotten password.
-        </p>
 
         
       </div>

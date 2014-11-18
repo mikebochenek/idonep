@@ -47,3 +47,17 @@ rememberme = Remember me
 signin = Sign in
 donthaveaccount = don't have an account yet? click here to
 createfreeaccount = create a free account
+
+# create login
+createnewaccount = Create new account
+reenterpassword = re-enter Password
+create = Create
+passwordsarehashed = note that passwords are stored in a secure hash, and you we cannot send you a forgotten password.
+
+# contact
+contactus = contact us
+contactustext = we would really love hearing from you - send us an email mike at bochenek dot ca
+
+# about
+
+
