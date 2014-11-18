@@ -38,7 +38,7 @@ object Application extends Controller {
   val loginForm = Form(
     tuple(
       "email" -> text,
-      "password" -> text) verifying ("Invalid email or password", result => result match {
+      "password" -> text) verifying ("invalidlogin", result => result match {
         case (email, password) => User.authenticate(email, password).isDefined
       }))
 
@@ -48,7 +48,7 @@ object Application extends Controller {
     tuple(
       "email" -> text,
       "password" -> text,
-      "password2" -> text) verifying ("email already in use or passwords not matching", result => result match {
+      "password2" -> text) verifying ("createuserfailed", result => result match {
         case (email, password, password2) => User.create(email, password, password2).isDefined
       }))
 

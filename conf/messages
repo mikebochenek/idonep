@@ -25,3 +25,7 @@ password = password
 newpassword = new password
 newpassword2 = re-enter new password
 exportdata = Export Data
+
+# login
+invalidlogin = Invalid email or password
+createuserfailed = email already in use or passwords not matching
