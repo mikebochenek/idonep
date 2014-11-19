@@ -30,7 +30,7 @@ object LangFromSubdomain extends Filter {
 
     val newRequestHeader = request.copy(headers = newHeaders)
     
-    Logger.info(request.headers.get(HeaderNames.ACCEPT_LANGUAGE) + "---> " + subdomainLanguage)
+    //Logger.info(request.headers.get(HeaderNames.ACCEPT_LANGUAGE) + "---> " + subdomainLanguage)
 
     next(newRequestHeader)
   }
