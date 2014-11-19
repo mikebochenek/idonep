@@ -38,6 +38,7 @@ addnew = Add New
 comingsoon = Coming soon.... 
 integrations = integrations: github, zenhub, jira, todoist, etc.
 purgedata = purge data: click here and do not log in for 120 days and we will purge all your data forever
+gtdmode = mode to handle GTD - get things done
 
 # login
 invalidlogin = Invalid email or password
