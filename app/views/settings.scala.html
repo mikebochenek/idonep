@@ -1,6 +1,6 @@
 @(form: Form[(String,String,String,String,String,String)], me: User, 
 	confirmedTargets: Seq[User], unconfirmedTargets: Seq[User],
-	confirmedOwners: Seq[User], unconfirmedOwners: Seq[User])(implicit flash: Flash, session: Session)
+	confirmedOwners: Seq[User], unconfirmedOwners: Seq[User])(implicit flash: Flash, session: Session, lang: Lang)
 
 @main(title = "settings") {
 

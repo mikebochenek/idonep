@@ -17,20 +17,20 @@ import play.api.Logger
 object LangFromSubdomain extends Filter {
     def apply(next: (RequestHeader) => Future[SimpleResult])(request: RequestHeader): Future[SimpleResult] = {
 
-    val subdomainLanguage = request.domain.toString.substring(0, 3) match {
-      case "it." => "it"
-      case "es." => "es"
-      case "de." => "de"
-      case "fr." => "fr"
+    val subdomainLanguage = request.headers.get(HeaderNames.ACCEPT_LANGUAGE).get/*.substring(0,2) match {
+      case "it" => "it"
+      case "es" => "es"
+      case "de" => "de"
+      case "fr" => "fr"
       case _ => "en"
-    }
+    }*/
 
     val newHeaders = new Headers { val data = (request.headers.toMap
         + (HeaderNames.ACCEPT_LANGUAGE -> Seq(subdomainLanguage))).toList }
 
     val newRequestHeader = request.copy(headers = newHeaders)
     
-    //Logger.info("---> " + subdomainLanguage)
+    Logger.info(request.headers.get(HeaderNames.ACCEPT_LANGUAGE) + "---> " + subdomainLanguage)
 
     next(newRequestHeader)
   }
