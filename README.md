@@ -24,7 +24,7 @@ Stop making depressing todo lists, instead celebrate your daily accomplishments!
 Follow these steps in order to deploy the project on your machine:
 
 1. Download scala and play
-2. manually run conf/evolutions/default/1.sql in your database
+2. manually run conf/evolutions/default/*.sql in your database
 3. check conf/application.conf (particularly db.* settings)
 4. start play, compile, and run
 
