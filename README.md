@@ -14,7 +14,7 @@ Stop making depressing todo lists, instead celebrate your daily accomplishments!
 
 ## Technology stack
 
-1. Play Framework 2.2.3
+1. Scala Play Framework 2.2.3
 2. AngularJS 1.2.19
 3. Bootstrap 3.2.0
 4. jQuery 1.11.1 (used by 4)
