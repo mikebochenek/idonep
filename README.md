@@ -18,7 +18,7 @@ Stop making depressing todo lists, instead celebrate your daily accomplishments!
 2. AngularJS 1.2.19
 3. Bootstrap 3.2.0
 4. jQuery 1.11.1 (used by 4)
-5. MySQL (or any other regular database for persistence)
+5. MySQL (or any other database for persistence)
 
 ## Deployment
 Follow these steps in order to deploy the project on your machine:
