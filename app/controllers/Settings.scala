@@ -26,7 +26,7 @@ object Settings extends Controller with Secured {
       val fullUser = User.getFullUser(username)
 
       if (fullUser.settings != null) {
-        val userSettings = Json.parse(fullUser.settings) \ "language" //.asOpt[UserSettings] //TODO this doesn't parse!!
+        val userSettings = Json.parse(fullUser.settings).validate[UserSettings].get 
         Logger.debug("parse ----->" + userSettings)
       }
       
@@ -64,7 +64,7 @@ object Settings extends Controller with Secured {
       if (fullUser.settings == null || language != Json.parse(fullUser.settings) \ "language") {
         Logger.debug("yes, we will save the language:" + language)
 
-        val userSettings = new UserSettings(fullUser.id, language, false, null)
+        val userSettings = new UserSettings(fullUser.id, language, false, "")
         val settingsJson = Json.toJson(userSettings).toString
         Logger.debug(settingsJson)
         User.update(fullUser, email, settingsJson)
