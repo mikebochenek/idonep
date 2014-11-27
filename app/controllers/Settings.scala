@@ -24,6 +24,11 @@ object Settings extends Controller with Secured {
       val me = User.findByEmail(username)
       
       val fullUser = User.getFullUser(username)
+
+      if (fullUser.settings != null) {
+        val userSettings = Json.parse(fullUser.settings) \ "language" //.asOpt[UserSettings] //TODO this doesn't parse!!
+        Logger.debug("parse ----->" + userSettings)
+      }
       
       val confirmedTargets = Team.findMyTargets(me.id, 1)
       val unconfirmedTargets = Team.findMyTargets(me.id, 0)
@@ -53,6 +58,18 @@ object Settings extends Controller with Secured {
       val (email, language, password, passwordnew1, passwordnew2, newusertarget) = settingsForm.bindFromRequest.get
 
       Logger.debug("email:" + email + " language:" + language)
+
+      val fullUser = User.getFullUser(username)
+
+      if (fullUser.settings == null || language != Json.parse(fullUser.settings) \ "language") {
+        Logger.debug("yes, we will save the language:" + language)
+
+        val userSettings = new UserSettings(fullUser.id, language, false, null)
+        val settingsJson = Json.toJson(userSettings).toString
+        Logger.debug(settingsJson)
+        User.update(fullUser, email, settingsJson)
+      }
+      
       //Logger.debug("password:" + password + " passwordnew1:" + passwordnew1 + " passwordnew2:" + passwordnew2)
 
       if (password != null && password.trim.length > 0 

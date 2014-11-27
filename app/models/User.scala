@@ -86,7 +86,20 @@ object User {
       SQL("select id, email, username, password from user").as(User.simple *)
     }
   }
-  
+
+  def update(user: UserFull, email: String, settings: String) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+         update user set email = {email}, settings = {settings} where 
+         id = {id} 
+        """).on(
+          'email -> email,
+          'settings -> settings,
+          'id -> user.id).executeUpdate
+    }
+  }
+
   def updatelastlogindate(email: String) = {
     DB.withConnection { implicit connection =>
       SQL(
