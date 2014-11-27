@@ -1,4 +1,4 @@
-@(form: Form[(String,String,String,String,String,String)], me: User, 
+@(form: Form[(String,String,String,String,String,String)], me: User, settings: UserSettings,
 	confirmedTargets: Seq[User], unconfirmedTargets: Seq[User],
 	confirmedOwners: Seq[User], unconfirmedOwners: Seq[User])(implicit flash: Flash, session: Session, lang: Lang)
 
@@ -16,9 +16,9 @@
       <div class="row ">
         <div class="col-sm-8 col-md-offset-2">
           <input class="form-control span4" type="text" name="email" id="email" value="@me.email">
-          <input class="form-control span4" type="text" name="language" id="language">
+          <input class="hidden form-control span4" type="text" name="language" id="language" value="@settings.language">
 
-            	<div onchange="alert(this.value);" class="span2 bfh-selectbox bfh-languages" data-language="en_US" 
+            	<div onchange="$('#language').val(this.value);" class="span2 bfh-selectbox bfh-languages" data-language="@settings.language" 
 					data-available="en_US,es_ES,fr_FR,de_DE,it_IT,pl_PL,pt_PT,ru_RU,ja_JP,zh_CN,hi_IN,ar_ZA,tr_TR" data-flags="true">
   					<input type="hidden" value=""></input>
  						<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">

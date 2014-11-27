@@ -25,8 +25,9 @@ object Settings extends Controller with Secured {
       
       val fullUser = User.getFullUser(username)
 
+      var userSettings = new UserSettings(fullUser.id, "en", false, "")
       if (fullUser.settings != null) {
-        val userSettings = Json.parse(fullUser.settings).validate[UserSettings].get 
+        userSettings = Json.parse(fullUser.settings).validate[UserSettings].get 
         Logger.debug("parse ----->" + userSettings)
       }
       
@@ -40,7 +41,7 @@ object Settings extends Controller with Secured {
           + " confirmedOwners: " + confirmedOwners.size
           + " unconfirmedOwners: " + unconfirmedOwners.size)
       
-      Ok(views.html.settings(settingsForm, me, confirmedTargets, unconfirmedTargets, confirmedOwners, unconfirmedOwners))
+      Ok(views.html.settings(settingsForm, me, userSettings, confirmedTargets, unconfirmedTargets, confirmedOwners, unconfirmedOwners))
     }
   }
 
