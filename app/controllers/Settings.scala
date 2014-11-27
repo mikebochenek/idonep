@@ -12,6 +12,7 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.Logger
+import play.api.http.HeaderNames
 
 import com.thoughtworks.xstream._
 
@@ -24,6 +25,9 @@ object Settings extends Controller with Secured {
       val me = User.findByEmail(username)
       
       val fullUser = User.getFullUser(username)
+      
+      val subdomainLanguage = request.headers.get(HeaderNames.ACCEPT_LANGUAGE).get/*.substring(0,2)*/
+      Logger.debug(" language from request:" + subdomainLanguage)
 
       var userSettings = new UserSettings(fullUser.id, "en", false, "")
       if (fullUser.settings != null) {
