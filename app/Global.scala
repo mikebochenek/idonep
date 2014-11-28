@@ -9,15 +9,18 @@ import java.util.Calendar
 import java.util.Date
 import play.api._
 import play.api.mvc._
+import play.api.mvc.Results._
+import play.api.data._
 import play.api.http.HeaderNames
 import scala.concurrent.Future
 import play.api.Logger
+import play.api.mvc.Session
 
 // http://stackoverflow.com/questions/23525022/play-2-2-for-scala-modifying-acceptlanguage-http-request-header-with-scalainte
 object LangFromSubdomain extends Filter {
-    def apply(next: (RequestHeader) => Future[SimpleResult])(request: RequestHeader): Future[SimpleResult] = {
+  def apply(next: (RequestHeader) => Future[SimpleResult])(request: RequestHeader): Future[SimpleResult] = {
 
-    val subdomainLanguage = request.headers.get(HeaderNames.ACCEPT_LANGUAGE).get/*.substring(0,2) match {
+    val subdomainLanguage = request.headers.get(HeaderNames.ACCEPT_LANGUAGE).get /*.substring(0,2) match {
       case "it" => "it"
       case "es" => "es"
       case "de" => "de"
@@ -25,11 +28,13 @@ object LangFromSubdomain extends Filter {
       case _ => "en"
     }*/
 
-    val newHeaders = new Headers { val data = (request.headers.toMap
-        + (HeaderNames.ACCEPT_LANGUAGE -> Seq(subdomainLanguage))).toList }
+    val newHeaders = new Headers {
+      val data = (request.headers.toMap
+        + (HeaderNames.ACCEPT_LANGUAGE -> Seq(subdomainLanguage))).toList
+    }
 
     val newRequestHeader = request.copy(headers = newHeaders)
-    
+
     //Logger.info(request.headers.get(HeaderNames.ACCEPT_LANGUAGE) + "---> " + subdomainLanguage)
 
     next(newRequestHeader)
@@ -46,7 +51,6 @@ object Global extends WithFilters(LangFromSubdomain) {
     play.api.Logger.info("Scheduling jobs...")
     import scala.concurrent.duration._
     import play.api.Play.current
-
 
     val actor = Akka.system.actorOf(
       Props(new EmailJobActor()))
@@ -76,4 +80,15 @@ object Global extends WithFilters(LangFromSubdomain) {
     delayInSeconds
   }
 
+  // 500 - internal server error
+  override def onError(request: RequestHeader, ex: Throwable) = {
+    Future.successful(InternalServerError(
+      views.html.error()))
+  }
+
+  // 404 - page not found error
+  override def onHandlerNotFound(request: RequestHeader) = {
+    Future.successful(NotFound(
+      views.html.error()))
+  }
 }
