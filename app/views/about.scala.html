@@ -1,4 +1,4 @@
-@()(implicit session: Session, lang: Lang)
+@()(implicit session: Session, lang: Lang, request: play.api.mvc.RequestHeader)
 @main(title = "about") {
     <div class="container">
 
@@ -21,7 +21,12 @@
 
 		<div>@Messages("aboutclosing")</div>
       	
-        
+      	@if(request.headers.get("User-Agent").get.contains("Firefox/31") || request.headers.get("User-Agent").get.contains("Firefox/25")) {
+          @helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
+		   <input type="file" name="picture">
+           <input type="submit">
+		  }
+		}
       </div>
 
     </div><!-- /.container -->

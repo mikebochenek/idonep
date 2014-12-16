@@ -13,6 +13,7 @@ GET     /logout                             controllers.Application.logout
 
 GET     /donelist                           controllers.DoneList.index
 GET     /about                              controllers.DoneList.about
+POST	/about								controllers.Application.upload
 GET     /contact                            controllers.DoneList.contact
 
 GET     /reports                            controllers.Reports.load
