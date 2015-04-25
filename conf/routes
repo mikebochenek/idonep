@@ -16,6 +16,10 @@ GET     /about                              controllers.DoneList.about
 POST	/about								controllers.Application.upload
 GET     /contact                            controllers.DoneList.contact
 
+GET     /memory                             controllers.Memory.index
+GET     /memory/:id                         controllers.Memory.get(id: Long)
+POST    /memory                             controllers.Memory.upload
+	
 GET     /reports                            controllers.Reports.load
 GET     /settings                           controllers.Settings.load
 POST    /settings                           controllers.Settings.save
