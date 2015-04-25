@@ -14,19 +14,14 @@ import play.api.data.Forms._
 import models._
 import views._
 
-object Memory extends Controller with Secured {
-  def index() = IsAuthenticated { username =>
-    implicit request => {
-      val id = User.findByEmail(username).id
+object Memory extends Controller  {
+  def index() = Action { implicit request =>
       Ok(views.html.memory())
-    }
   }
 
-  def get(id: Long) = IsAuthenticated { username =>
-    implicit request => {
-      val id = User.findByEmail(username).id
+  def get(id: Long) = Action { implicit request =>
+      
       Ok(views.html.index())
-    }
   }
 
   def upload = Action(parse.multipartFormData) { request =>
