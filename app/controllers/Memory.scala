@@ -25,12 +25,7 @@ object Memory extends Controller with Secured {
   def get(id: Long) = IsAuthenticated { username =>
     implicit request => {
       val id = User.findByEmail(username).id
-      if (username.contains("bochenek")) {
-        val stats = AdminHelper.generateStats()
-        Ok(views.html.iadmin(stats))
-      } else {
-        Ok(views.html.index())
-      }
+      Ok(views.html.index())
     }
   }
 
